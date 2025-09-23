@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Checkout - Restaurant Website</title>
+
+    <!-- Link our CSS file -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Stripe.js - Secure payment processing -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <!-- Prevent theme flash by applying saved theme immediately -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      })();
+    </script>
+  </head>
+
+  <body>
+    <!-- Navbar Section Starts Here -->
+    <section class="navbar">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html" title="Go to Home Page">
+            <img
+              src="images/logo.png"
+              alt="Restaurant Logo"
+              class="img-responsive"
+            />
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+
+        <div class="menu text-right" id="navbar-menu">
+          <ul>
+            <li>
+              <a href="index.html" data-translate="home">Home</a>
+            </li>
+            <li>
+              <a href="categories.html" data-translate="categories"
+                >Categories</a
+              >
+            </li>
+            <li>
+              <a href="foods.html" data-translate="food">Food</a>
+            </li>
+            <li>
+              <a href="cart.html"
+                ><span data-translate="myOrders">My Orders</span>
+                <span class="cart-counter">0</span></a
+              >
+            </li>
+            <li>
+              <a href="#contact" data-translate="contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-controls" id="navbar-controls">
+          <select
+            class="language-selector"
+            onchange="changeLanguage(this.value)"
+          >
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+            <option value="ar">AR</option>
+          </select>
+
+          <div class="theme-toggle" onclick="toggleTheme()">
+            <span class="icon">🌙</span>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </section>
+    <!-- Navbar Section Ends Here -->
+
+    <!-- Checkout Section Starts Here -->
+    <section class="checkout-section">
+      <div class="container">
+        <h2 class="text-center" data-translate="checkoutTitle">
+          Secure Checkout
+        </h2>
+
+        <div class="checkout-container">
+          <!-- Order Summary -->
+          <div class="checkout-summary">
+            <div class="summary-box">
+              <h3>Your Order</h3>
+              <div id="checkout-items">
+                <!-- Order items will be loaded here -->
+              </div>
+
+              <div class="summary-totals">
+                <div class="summary-row">
+                  <span>Subtotal:</span>
+                  <span id="checkout-subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                  <span>Delivery Fee:</span>
+                  <span id="checkout-delivery">$3.99</span>
+                </div>
+                <div class="summary-row">
+                  <span>Tax (8%):</span>
+                  <span id="checkout-tax">$0.00</span>
+                </div>
+                <div class="summary-row total">
+                  <span>Total:</span>
+                  <span id="checkout-total">$3.99</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Form -->
+          <div class="payment-form">
+            <form id="payment-form">
+              <!-- Customer Information -->
+              <div class="form-section">
+                <h3>🍽️ Delivery Information</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="customer-name">Full Name *</label>
+                    <input
+                      type="text"
+                      id="customer-name"
+                      name="customerName"
+                      required
+                      placeholder="John Doe"
+                      class="form-input"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="customer-email">Email Address *</label>
+                    <input
+                      type="email"
+                      id="customer-email"
+                      name="customerEmail"
+                      required
+                      placeholder="john@example.com"
+                      class="form-input"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="customer-phone">Phone Number *</label>
+                    <input
+                      type="tel"
+                      id="customer-phone"
+                      name="customerPhone"
+                      required
+                      placeholder="(555) 123-4567"
+                      class="form-input"
+                    />
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="customer-address">Delivery Address *</label>
+                    <textarea
+                      id="customer-address"
+                      name="customerAddress"
+                      required
+                      placeholder="123 Main Street, City, State 12345"
+                      class="form-input"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment Information -->
+              <div class="form-section">
+                <h3>💳 Secure Payment</h3>
+                <div class="security-badges">
+                  <span class="security-badge">🔒 256-bit SSL Encryption</span>
+                  <span class="security-badge">🛡️ PCI DSS Compliant</span>
+                  <span class="security-badge">✅ Stripe Secured</span>
+                </div>
+
+                <!-- Stripe Card Element Container -->
+                <div class="form-group">
+                  <label for="card-element">Card Information *</label>
+                  <div id="card-element" class="stripe-card-element">
+                    <!-- Stripe Elements will create form elements here -->
+                  </div>
+                  <div
+                    id="card-errors"
+                    role="alert"
+                    class="error-message"
+                  ></div>
+                </div>
+
+                <!-- Payment Method Icons -->
+                <div class="payment-methods">
+                  <span>We accept:</span>
+                  <div class="payment-icons">
+                    <img
+                      src="https://img.icons8.com/color/48/visa.png"
+                      alt="Visa"
+                    />
+                    <img
+                      src="https://img.icons8.com/color/48/mastercard.png"
+                      alt="Mastercard"
+                    />
+                    <img
+                      src="https://img.icons8.com/color/48/amex.png"
+                      alt="American Express"
+                    />
+                    <img
+                      src="https://img.icons8.com/color/48/discover.png"
+                      alt="Discover"
+                    />
+                    <img
+                      src="https://img.icons8.com/color/48/paypal.png"
+                      alt="PayPal"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="form-section">
+                <button
+                  type="submit"
+                  id="submit-payment"
+                  class="btn btn-primary btn-large"
+                >
+                  <span id="button-text"> 🔒 Complete Secure Payment </span>
+                  <span id="spinner" class="hidden">
+                    <div class="loading-spinner"></div>
+                  </span>
+                </button>
+
+                <p class="payment-security-note">
+                  <small>
+                    🔐 Your payment information is encrypted and secure. We
+                    never store your card details on our servers.
+                  </small>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Payment Success Modal -->
+        <div id="payment-success-modal" class="modal hidden">
+          <div class="modal-content">
+            <div class="success-animation">
+              <div class="checkmark">✓</div>
+            </div>
+            <h3>Payment Successful! 🎉</h3>
+            <p>
+              Thank you for your order! We'll start preparing your delicious
+              food right away.
+            </p>
+            <div class="order-details">
+              <p><strong>Order ID:</strong> <span id="order-id"></span></p>
+              <p><strong>Estimated Delivery:</strong> 30-45 minutes</p>
+            </div>
+            <div class="modal-actions">
+              <button class="btn btn-primary" onclick="goToHome()">
+                Continue Shopping
+              </button>
+              <button class="btn btn-secondary" onclick="trackOrder()">
+                Track Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Checkout Section Ends Here -->
+
+    <!-- social Section Starts Here -->
+    <section class="social" id="contact">
+      <div class="container text-center">
+        <h3>Connect With Us</h3>
+        <ul>
+          <li>
+            <a href="#" title="Facebook">
+              <img
+                src="https://img.icons8.com/color/48/facebook-new.png"
+                alt="Facebook"
+              />
+            </a>
+          </li>
+          <li>
+            <a href="#" title="Instagram">
+              <img
+                src="https://img.icons8.com/color/48/instagram-new.png"
+                alt="Instagram"
+              />
+            </a>
+          </li>
+          <li>
+            <a href="#" title="X (Twitter)">
+              <img
+                src="https://img.icons8.com/color/48/twitterx--v1.png"
+                alt="X (Twitter)"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- social Section Ends Here -->
+
+    <!-- footer Section Starts Here -->
+    <section class="footer">
+      <div class="container text-center">
+        <p>All rights reserved. Designed By <a href="#">ID</a></p>
+      </div>
+    </section>
+    <!-- footer Section Ends Here -->
+
+    <!-- JavaScript -->
+    <script src="js/checkout-test.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+  </body>
+</html>

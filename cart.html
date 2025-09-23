@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Important to make website responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Orders - Restaurant Website</title>
+
+    <!-- Link our CSS file -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Prevent theme flash by applying saved theme immediately -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      })();
+    </script>
+  </head>
+
+  <body>
+    <!-- Navbar Section Starts Here -->
+    <section class="navbar">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html" title="Go to Home Page">
+            <img
+              src="images/logo.png"
+              alt="Restaurant Logo"
+              class="img-responsive"
+            />
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+
+        <div class="menu text-right" id="navbar-menu">
+          <ul>
+            <li>
+              <a href="index.html" data-translate="home">Home</a>
+            </li>
+            <li>
+              <a href="categories.html" data-translate="categories"
+                >Categories</a
+              >
+            </li>
+            <li>
+              <a href="foods.html" data-translate="food">Food</a>
+            </li>
+            <li>
+              <a href="cart.html" class="active"
+                ><span data-translate="myOrders">My Orders</span>
+                <span class="cart-counter">0</span></a
+              >
+            </li>
+            <li>
+              <a href="#contact" data-translate="contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-controls" id="navbar-controls">
+          <select
+            class="language-selector"
+            onchange="changeLanguage(this.value)"
+          >
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+            <option value="ar">AR</option>
+          </select>
+
+          <div class="theme-toggle" onclick="toggleTheme()">
+            <span class="icon">🌙</span>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </section>
+    <!-- Navbar Section Ends Here -->
+
+    <!-- My Orders Section Starts Here -->
+    <section class="cart-section">
+      <div class="container">
+        <h2 class="text-center" data-translate="myOrdersTitle">My Orders</h2>
+
+        <!-- Order Items Container -->
+        <div class="cart-container">
+          <div id="cart-items">
+            <!-- Order items will be loaded here by JavaScript -->
+          </div>
+
+          <!-- Order Summary -->
+          <div class="cart-summary">
+            <div class="summary-box">
+              <h3 data-translate="orderSummary">Order Summary</h3>
+              <div class="summary-row">
+                <span data-translate="subtotal">Subtotal:</span>
+                <span id="cart-subtotal">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span data-translate="deliveryFee">Delivery Fee:</span>
+                <span id="delivery-fee">$3.99</span>
+              </div>
+              <div class="summary-row">
+                <span data-translate="tax">Tax (8%):</span>
+                <span id="cart-tax">$0.00</span>
+              </div>
+              <div class="summary-row total">
+                <span data-translate="total">Total:</span>
+                <span id="cart-total">$3.99</span>
+              </div>
+
+              <div class="cart-actions">
+                <button
+                  class="btn btn-secondary"
+                  onclick="clearCart()"
+                  data-translate="clearOrders"
+                >
+                  Clear Orders
+                </button>
+                <button
+                  class="btn btn-primary"
+                  onclick="proceedToCheckout()"
+                  data-translate="proceedToCheckout"
+                >
+                  Proceed to Checkout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty Order Message -->
+        <div id="empty-cart" class="empty-cart" style="display: none">
+          <div class="empty-cart-content">
+            <h3 data-translate="emptyOrderTitle">Your order is empty</h3>
+            <p data-translate="emptyOrderText">
+              Add some delicious food items to your order to get started!
+            </p>
+            <a
+              href="foods.html"
+              class="btn btn-primary"
+              data-translate="browseFood"
+              >Browse Foods</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- My Orders Section Ends Here -->
+
+    <!-- social Section Starts Here -->
+    <section class="social" id="contact">
+      <div class="container text-center">
+        <ul>
+          <li>
+            <a href="#" title="Facebook">
+              <img
+                src="https://img.icons8.com/color/48/facebook-new.png"
+                alt="Facebook"
+              />
+            </a>
+          </li>
+          <li>
+            <a href="#" title="Instagram">
+              <img
+                src="https://img.icons8.com/color/48/instagram-new.png"
+                alt="Instagram"
+              />
+            </a>
+          </li>
+          <li>
+            <a href="#" title="X (Twitter)">
+              <img
+                src="https://img.icons8.com/color/48/twitterx--v1.png"
+                alt="X (Twitter)"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- social Section Ends Here -->
+
+    <!-- footer Section Starts Here -->
+    <section class="footer">
+      <div class="container text-center">
+        <p>All rights reserved. Designed By <a href="#">ID</a></p>
+      </div>
+    </section>
+    <!-- footer Section Ends Here -->
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+    <script src="js/cart.js"></script>
+  </body>
+</html>
