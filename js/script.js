@@ -309,7 +309,7 @@ const translations = {
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, asperiores!",
 
     // Categories
-    categoriesTitle: "Explore Foods",
+    categoriesTitle: "Explore Food",
 
     // Food page
     foodTitle: "Food Menu",
@@ -326,7 +326,7 @@ const translations = {
     emptyOrderTitle: "Your order is empty",
     emptyOrderText:
       "Add some delicious food items to your order to get started!",
-    browseFood: "Browse Foods",
+    browseFood: "Browse Food",
 
     // Checkout
     checkoutTitle: "Secure Checkout",
@@ -572,19 +572,45 @@ function toggleMobileMenu() {
   const menu = document.getElementById("navbar-menu");
   const controls = document.getElementById("navbar-controls");
   const toggleButton = document.querySelector(".mobile-menu-toggle");
+  if (!menu || !toggleButton) return;
 
-  if (menu && controls && toggleButton) {
-    // Toggle menu visibility
-    menu.classList.toggle("active");
-    controls.classList.toggle("active");
-    toggleButton.classList.toggle("active");
+  const willOpen = !menu.classList.contains("active");
 
-    // Prevent body scroll when menu is open on mobile
-    if (menu.classList.contains("active")) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+  menu.classList.toggle("active", willOpen);
+  toggleButton.classList.toggle("active", willOpen);
+  if (controls) controls.classList.toggle("active", willOpen);
+
+  // Accessibility
+  toggleButton.setAttribute("aria-expanded", willOpen ? "true" : "false");
+  menu.setAttribute("aria-hidden", willOpen ? "false" : "true");
+
+  // Prevent body scroll when menu open
+  document.body.style.overflow = willOpen ? "hidden" : "";
+  // Move navbar-controls into the menu on mobile so they appear below the links
+  try {
+    if (willOpen && controls && menu) {
+      // Save original parent and nextSibling so we can restore later
+      controls._originalParent = controls.parentNode;
+      controls._originalNext = controls.nextSibling;
+      menu.appendChild(controls);
+    } else if (!willOpen && controls) {
+      // restore to the original location if available
+      if (controls._originalParent) {
+        if (
+          controls._originalNext &&
+          controls._originalNext.parentNode === controls._originalParent
+        ) {
+          controls._originalParent.insertBefore(
+            controls,
+            controls._originalNext
+          );
+        } else {
+          controls._originalParent.appendChild(controls);
+        }
+      }
     }
+  } catch (e) {
+    // silently ignore DOM errors
   }
 }
 
@@ -593,13 +619,33 @@ function closeMobileMenu() {
   const menu = document.getElementById("navbar-menu");
   const controls = document.getElementById("navbar-controls");
   const toggleButton = document.querySelector(".mobile-menu-toggle");
+  if (!menu || !toggleButton) return;
 
-  if (menu && controls && toggleButton) {
-    menu.classList.remove("active");
-    controls.classList.remove("active");
-    toggleButton.classList.remove("active");
-    document.body.style.overflow = "";
-  }
+  menu.classList.remove("active");
+  toggleButton.classList.remove("active");
+  if (controls) controls.classList.remove("active");
+  document.body.style.overflow = "";
+
+  // Accessibility
+  toggleButton.setAttribute("aria-expanded", "false");
+  menu.setAttribute("aria-hidden", "true");
+
+  // Ensure controls are restored back to original parent when menu is closed
+  try {
+    if (controls && controls._originalParent) {
+      if (
+        controls._originalNext &&
+        controls._originalNext.parentNode === controls._originalParent
+      ) {
+        controls._originalParent.insertBefore(controls, controls._originalNext);
+      } else {
+        controls._originalParent.appendChild(controls);
+      }
+      // clean up saved refs
+      delete controls._originalParent;
+      delete controls._originalNext;
+    }
+  } catch (e) {}
 }
 
 // Close mobile menu when clicking outside
@@ -637,3 +683,14 @@ window.addEventListener("resize", function () {
 // Make functions globally accessible
 window.toggleMobileMenu = toggleMobileMenu;
 window.closeMobileMenu = closeMobileMenu;
+
+// Scroll detection for glassmorphism navbar
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});

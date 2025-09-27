@@ -28,6 +28,13 @@
   --border-radius-lg: 20px;
 
   --transition: all 0.3s ease;
+
+  /* Glassmorphism Navbar Colors */
+  --bg-rgb-light: 255, 255, 255;
+  --bg-rgb-dark: 18, 18, 18;
+
+  /* Navbar offset to account for fixed navbar height and keep content below it */
+  --navbar-height: 80px; /* default desktop */
 }
 
 /* Dark Mode Colors */
@@ -55,35 +62,70 @@ html[data-theme="dark"] {
   --shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* CSS for All */
+/* CSS for All - modern, mobile-first */
 * {
-  margin: 0 0;
-  padding: 0 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  transition: var(--transition);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  line-height: 1.5;
+  font-weight: 400;
+  padding-top: var(--navbar-height);
+  transition: padding-top 0.25s ease;
 }
+
+/* Remove extra black gap under fixed navbar caused by sibling margins */
+/* This override ensures pages are positioned right below the fixed navbar
+   while body padding (using --navbar-height) handles the offset. */
+.navbar + .food-search,
+.navbar + .container,
+.navbar + section {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Also reset any leftover inline-like spacing selectors added earlier */
+.navbar + .food-search[style],
+.navbar + .container[style] {
+  margin-top: 0 !important;
+}
+
+/* Fluid container with comfortable max width */
 .container {
-  width: 80%;
+  width: 92%;
+  max-width: 1100px; /* slightly narrower so cards look larger */
   margin: 0 auto;
-  padding: 1%;
+  padding: 1rem 0;
 }
-.img-responsive {
-  width: 100%;
+
+/* Images and media */
+.img-responsive,
+img,
+video,
+iframe {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 .img-curve {
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-light);
 }
 
+/* Text alignment helpers */
 .text-right {
   text-align: right;
 }
@@ -97,9 +139,10 @@ body {
   color: var(--text-white);
 }
 
-.clearfix {
+.clearfix::after {
+  content: "";
+  display: table;
   clear: both;
-  float: none;
 }
 
 a {
@@ -111,15 +154,29 @@ a:hover {
   color: var(--primary-hover);
 }
 
+/* Buttons */
 .btn {
-  padding: 12px 24px;
-  border: none;
-  font-size: 1rem;
-  border-radius: var(--border-radius-sm);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
   cursor: pointer;
-  transition: var(--transition);
-  font-weight: 500;
-  display: inline-block;
+  border: none;
+  display: inline-flex;
+  align-items: center; /* vertical centering */
+  justify-content: center; /* horizontal centering */
+  text-align: center; /* fallback for non-flex contexts */
+  gap: 0.5rem;
+}
+
+/* Ensure native button and input-based buttons center their content */
+button,
+input[type="button"],
+input[type="submit"],
+.btn {
+  display: inline-flex; /* allow vertical/horizontal centering */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .btn-primary {
   background: linear-gradient(
@@ -133,56 +190,35 @@ a:hover {
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-medium);
-  background: linear-gradient(45deg, var(--primary-hover), var(--danger-color));
 }
 
-/* Dark Mode Toggle Button */
+/* Theme toggle */
 .theme-toggle {
   background: var(--bg-secondary);
-  border: 2px solid var(--border-color);
-  border-radius: 50%;
-  padding: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 8px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: var(--transition);
-  color: var(--text-primary);
-  width: 28px;
-  height: 28px;
-  font-family: Arial, sans-serif;
 }
 
-.theme-toggle:hover {
-  background: var(--bg-tertiary);
-  transform: scale(1.05);
-  box-shadow: var(--shadow-light);
-}
-
-.theme-toggle .icon {
-  font-size: 12px;
-  font-family: Arial, sans-serif;
-}
-
-h2 {
-  color: var(--text-primary);
-  font-size: 2.5rem;
-  margin-bottom: 2%;
+/* Headlines */
+h1,
+h2,
+h3 {
   font-weight: 700;
-  background: linear-gradient(
-    45deg,
-    var(--primary-color),
-    var(--secondary-color)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
+}
+h2 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
 }
 h3 {
-  font-size: 1.5rem;
-  color: var(--text-primary);
-  font-weight: 600;
+  font-size: 1.125rem;
 }
+
 .float-container {
   position: relative;
   overflow: hidden;
@@ -190,23 +226,23 @@ h3 {
   transition: var(--transition);
 }
 .float-container:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-heavy);
 }
 .float-text {
   position: absolute;
-  bottom: 50px;
-  left: 40%;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 8px 16px;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.5rem 1rem;
   border-radius: var(--border-radius-sm);
-  backdrop-filter: blur(10px);
 }
+
 fieldset {
-  border: 2px solid var(--border-color);
-  margin: 5%;
-  padding: 3%;
-  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 10px;
   background: var(--bg-secondary);
 }
 
@@ -214,18 +250,35 @@ fieldset {
 .navbar {
   background: var(--bg-primary);
   box-shadow: var(--shadow-light);
-  padding: 5px 0;
+  padding: 0.25rem 0;
   position: relative;
   z-index: 1000;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
+  transition: background 0.3s ease, backdrop-filter 0.3s ease,
+    box-shadow 0.3s ease;
+  height: var(--navbar-height);
+  min-height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+}
+.navbar.scrolled {
+  background: rgba(var(--bg-rgb-light), 0.25);
+  backdrop-filter: blur(40px) saturate(1.8) brightness(1.15);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
 .logo {
-  width: 10%;
-  float: left;
+  display: flex;
+  align-items: center;
 }
 .logo img {
-  max-height: 35px;
+  max-height: 44px;
   transition: var(--transition);
 }
 .logo img:hover {
@@ -238,15 +291,16 @@ html[data-theme="dark"] .logo img {
 }
 
 .menu {
-  line-height: 45px;
-  float: left;
-  width: 70%;
+  flex: 1;
 }
 .menu ul {
-  list-style-type: none;
+  list-style: none;
   display: flex;
+  gap: 1rem;
+  align-items: center;
   justify-content: center;
-  gap: 2rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* When menu has text-right class, align items to the right */
@@ -255,13 +309,13 @@ html[data-theme="dark"] .logo img {
 }
 
 .menu ul li {
-  display: inline;
+  display: inline-block;
   font-weight: 600;
 }
 
 .menu ul li a {
-  padding: 8px 16px;
-  border-radius: var(--border-radius-sm);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
   transition: var(--transition);
   position: relative;
 }
@@ -277,31 +331,25 @@ html[data-theme="dark"] .logo img {
 }
 
 .navbar .theme-toggle {
-  float: right;
-  margin-top: 6px;
+  margin-left: 0.5rem;
 }
 
 /* Navbar Controls Container */
 .navbar-controls {
-  float: right;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 0.5rem;
 }
 
 /* Language Selector */
 .language-selector {
   background: var(--bg-secondary);
-  border: 2px solid var(--border-color);
-  border-radius: 4px;
-  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.35rem 0.5rem;
   color: var(--text-primary);
-  font-size: 12px;
-  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: var(--transition);
-  outline: none;
 }
 
 .language-selector:hover {
@@ -315,43 +363,28 @@ html[data-theme="dark"] .logo img {
 }
 
 /* RTL (Arabic) Support */
-html[dir="rtl"] {
-  text-align: right;
-}
-
-html[dir="rtl"] .navbar-controls {
-  float: left;
-}
-
-html[dir="rtl"] .menu {
-  float: right;
-}
-
-html[dir="rtl"] .logo {
-  float: right;
+.rtl {
+  direction: rtl;
 }
 
 /* Mobile Menu Toggle Button (Hamburger Menu) */
+
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
   justify-content: space-around;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
-  margin: 0;
-  float: right;
-  margin-top: 6px;
+  padding: 6px;
 }
-
 .hamburger-line {
   width: 100%;
   height: 3px;
   background: var(--text-primary);
-  border-radius: 2px;
+  border-radius: 3px;
   transition: var(--transition);
 }
 
@@ -359,13 +392,11 @@ html[dir="rtl"] .logo {
 .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
   transform: rotate(45deg) translate(6px, 6px);
 }
-
 .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
   opacity: 0;
 }
-
 .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* CSS for Food Search Section */
@@ -375,10 +406,77 @@ html[dir="rtl"] .logo {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  padding: 7% 0;
+  padding: 3.5rem 0;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48vh; /* controls vertical space; adjust if needed */
+  padding: 0; /* remove asymmetric padding */
 }
 
+/* make overlay sit behind content */
+.food-search::before {
+  z-index: 0;
+}
+
+/* ensure container/content sit above the overlay and are centered */
+.food-search .container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  padding: 0 1rem; /* small horizontal breathing room */
+}
+
+/* Center the search form itself and make it a single centered row */
+.food-search form,
+.food-search > .container > form {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2; /* ensure form is on top */
+}
+
+.food-search input[type="search"] {
+  flex: 1 1 auto;
+  min-width: 220px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.food-search input[type="submit"],
+.food-search .btn {
+  flex: 0 0 auto;
+  padding: 12px 20px;
+  border-radius: 12px;
+}
+
+/* Responsive: make hero slightly taller on small screens and stack form vertically */
+@media (max-width: 768px) {
+  .food-search {
+    min-height: 40vh;
+  }
+  .food-search form {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .food-search input[type="search"] {
+    width: 100%;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+  }
+}
 .food-search::before {
   content: "";
   position: absolute;
@@ -391,8 +489,211 @@ html[dir="rtl"] .logo {
 }
 
 .food-search .container {
-  position: relative;
+  display: flex;
+  align-items: center; /* vertical centering */
+  justify-content: center; /* horizontal centering */
+  min-height: calc(var(--navbar-height) * 3.5); /* give the hero some height */
+  padding: 2rem 0; /* reduce top/bottom padding for tighter layout */
+}
+
+.food-search h2 {
   z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Make sure overlay doesn't block centering */
+.food-search::before {
+  z-index: 1;
+}
+
+/* Grid layouts for categories and food cards */
+.categories .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.food-menu {
+  padding: 1.25rem 0;
+}
+.food-menu .food-menu-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+.food-menu .food-menu-box {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+.food-menu .food-menu-img img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  border-radius: 8px;
+}
+
+/* Specific styles for Pepperoni Pizza card */
+.food-menu-box:nth-child(3) .food-menu-img img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  border-radius: 8px;
+}
+
+/* Touch targets and accessible spacing */
+.menu ul li a,
+.btn {
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+}
+
+/* Word-break and overflow handling */
+* {
+  word-break: break-word;
+}
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* Breakpoints */
+@media (max-width: 1024px) {
+  .container {
+    width: 94%;
+  }
+  .food-menu .food-menu-img img {
+    width: 100px;
+    height: auto;
+    aspect-ratio: 4/3;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  .menu {
+    display: none;
+    width: 100%;
+  }
+  .menu.active {
+    display: block;
+  }
+  /* Stack and stretch menu items to full width */
+  .menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+    padding: 0.5rem 0 2rem;
+    margin: 0;
+    width: 100%;
+  }
+  .menu ul li {
+    width: 100%;
+  }
+  .menu ul li a {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    text-align: left;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.06);
+  }
+  /* Ensure active panel doesn't constrain width */
+  .menu.active .menu-logo {
+    display: block;
+  }
+  .navbar .container {
+    align-items: flex-start;
+  }
+  .navbar-controls {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+  .food-menu .food-menu-box {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+}
+
+/* When navbar-controls are moved into the menu (mobile), make them full width and stacked */
+@media (max-width: 768px) {
+  .menu .navbar-controls {
+    position: static;
+    width: 100%;
+    display: flex;
+    gap: 0.6rem;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 0 24px;
+    margin-top: 0.5rem;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .menu .navbar-controls .language-selector,
+  .menu .navbar-controls .theme-toggle {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start; /* left aligned like links */
+    padding: 14px 18px; /* match menu item padding */
+    border-radius: 10px; /* pill radius */
+    background: rgba(0, 0, 0, 0.06); /* same subtle pill bg as links */
+    color: var(--text-white);
+    font-weight: 600; /* match menu link weight */
+    font-size: 1rem;
+    min-height: 44px; /* same touch height used elsewhere */
+    box-shadow: none;
+  }
+
+  /* Language select: remove native appearance, add white caret and spacing */
+  .menu .navbar-controls .language-selector {
+    padding-right: 40px; /* room for caret */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 12px 8px;
+    /* white caret SVG */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23fff' d='M6 8L0 0h12z'/></svg>");
+  }
+
+  /* Theme toggle: match pill layout, keep icon left-aligned like menu text */
+  .menu .navbar-controls .theme-toggle {
+    gap: 0.5rem;
+    justify-content: flex-start;
+    padding-left: 18px; /* align icon with link text */
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.25rem;
+  }
+  .food-menu .food-menu-img img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+  }
+  .logo img {
+    max-height: 38px;
+  }
+}
+
+/* Small utility */
+.hidden {
+  display: none !important;
 }
 
 .food-search h2 {
@@ -419,45 +720,141 @@ html[dir="rtl"] .logo {
 }
 
 /* CSS for Categories */
+
 .categories {
-  padding: 4% 0;
+  padding: 2.5rem 0;
   background: var(--bg-secondary);
 }
 
+/* Centered responsive grid for category cards: make cards stretch to fill columns
+   so left/right gutters are balanced and cards appear larger on wide screens. */
+.categories .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  align-items: center;
+  justify-items: stretch; /* stretch cards to fill their column */
+}
+
 .box-3 {
-  width: 28%;
-  float: left;
-  margin: 2%;
+  width: 100%;
+  max-width: none; /* allow box to grow to the full column width */
   position: relative;
   border-radius: var(--border-radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-light);
   transition: var(--transition);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.02));
 }
 
 .box-3:hover {
-  transform: translateY(-10px) scale(1.02);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-heavy);
 }
 
 .box-3 img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
   transition: var(--transition);
+  display: block;
+}
+.box-3:hover img {
+  transform: scale(1.06);
 }
 
-.box-3:hover img {
-  transform: scale(1.1);
+.box-3 .float-text {
+  left: 1rem;
+  bottom: 1rem;
 }
 
 /* CSS for Food Menu */
 .food-menu {
   background: var(--bg-primary);
-  padding: 4% 0;
+  padding: 0.75rem 0 1rem;
 }
+
+/* Grid for food cards, centered, 2-3 per row */
+.food-menu .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Reset category grid row behavior so cards don't force extra vertical space */
+.categories .container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(320px, 1fr)
+  ); /* larger cards */
+  gap: 1rem;
+  align-items: center;
+  justify-items: stretch; /* stretch cards to fill their column */
+}
+
+/* Modern responsive typography for section headings */
+.food-menu h2,
+.categories h2 {
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  line-height: 1.2;
+}
+
+/* Keep default row sizing for food menu cards to avoid extra vertical space */
+
+/* Slightly larger images and padding on wide screens for better rhythm */
+@media (min-width: 1100px) {
+  .food-menu .container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .food-menu-box {
+    grid-template-columns: 140px 1fr;
+    padding: 1.25rem;
+  }
+  .food-menu-img {
+    width: 140px;
+  }
+  .box-3 img {
+    aspect-ratio: 16/10;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1099px) {
+  /* Two columns layout for medium screens */
+  .food-menu .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Accessibility helpers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Visible focus state for keyboard users */
+a:focus-visible,
+.btn:focus-visible,
+button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary-color) 60%, transparent);
+  outline-offset: 3px;
+}
+
 .food-menu-box {
-  width: 43%;
-  margin: 1%;
-  padding: 2%;
-  float: left;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0.6rem;
+  align-items: center; /* a bit tighter vertically */
+  padding: 0.6rem;
   background: var(--bg-secondary);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-light);
@@ -466,38 +863,83 @@ html[dir="rtl"] .logo {
 }
 
 .food-menu-box:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-heavy);
   border-color: var(--primary-color);
 }
 
 .food-menu-img {
-  width: 20%;
-  float: left;
+  width: 120px;
+  display: block;
 }
-
 .food-menu-img img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
   border-radius: var(--border-radius-md);
 }
 
 .food-menu-desc {
-  width: 70%;
-  float: left;
-  margin-left: 8%;
+  margin: 0;
 }
 
 .food-menu-desc h4 {
   color: var(--text-primary);
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
 }
 
 .food-price {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin: 2% 0;
   color: var(--accent-color);
   font-weight: 700;
+}
+.food-detail {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Headings centered for sections */
+.categories h2,
+.food-menu h2 {
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+/* Make section headings occupy the full grid row when inside a grid container
+   so the headings appear above the card grid instead of on the same row. */
+.categories .container > h2,
+.food-menu .container > h2 {
+  grid-column: 1 / -1;
+  justify-self: center; /* keep heading centered */
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .food-menu .container {
+    grid-template-columns: 1fr;
+  }
+  .food-menu-box {
+    grid-template-columns: 1fr;
+  }
+  .food-menu-img img {
+    width: 100%;
+    height: auto;
+  }
+  .box-3 img {
+    height: 180px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  .categories .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .food-detail {
   font-size: 1rem;
@@ -656,7 +1098,7 @@ html[dir="rtl"] .logo {
   }
   .box-3 {
     width: 100%;
-    margin: 4% auto;
+    margin: 0; /* let grid handle spacing */
   }
 
   .food-menu {
@@ -921,7 +1363,6 @@ html[dir="rtl"] .logo {
   align-items: center;
   justify-content: center;
 }
-
 .menu ul li a.active {
   background: linear-gradient(
     45deg,
@@ -930,10 +1371,70 @@ html[dir="rtl"] .logo {
   );
   color: var(--text-white);
   border-radius: var(--border-radius-sm);
-  padding: 10px 20px;
 }
 
-/* Mobile Responsiveness for Cart */
+/* Make sure food-menu grid rule is defined at top-level (it was accidentally nested above) */
+.food-menu .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.75rem;
+  align-items: start;
+}
+
+/* ===== Visual polish & utilities ===== */
+/* Small rounded badge used for categories or featured items */
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.65);
+  color: var(--text-white);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-light);
+  z-index: 4;
+}
+
+.box-3 .badge {
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+}
+
+/* Make category cards feel more even in height on larger screens */
+.box-3 {
+  min-height: clamp(180px, 22vh, 320px);
+}
+
+/* Ensure food menu cards have a stable, compact height while allowing growth */
+.food-menu-box {
+  min-height: 110px;
+}
+
+/* Slightly tighten the spacing between Food Menu heading and its cards */
+.food-menu .container > h2 {
+  margin-bottom: 0.5rem;
+}
+
+/* Subtle image hover on food items for micro-interaction */
+.food-menu-img img {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.food-menu-box:hover .food-menu-img img {
+  transform: scale(1.04);
+  box-shadow: var(--shadow-light);
+}
+
+/* Stronger visible focus for primary buttons */
+.btn-primary:focus-visible {
+  outline: 3px solid
+    color-mix(in srgb, var(--primary-color) 40%, var(--text-white) 10%);
+  outline-offset: 3px;
+}
 @media only screen and (max-width: 768px) {
   .cart-container {
     grid-template-columns: 1fr;
@@ -1199,6 +1700,9 @@ html[dir="rtl"] .logo {
   font-weight: 600;
   position: relative;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-large:disabled {
@@ -1335,6 +1839,14 @@ html[dir="rtl"] .logo {
 .modal-actions .btn {
   flex: 1;
   max-width: 150px;
+}
+
+/* ensure modal action buttons center their content */
+.modal-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Mobile Responsiveness */
@@ -1580,9 +2092,6 @@ html {
   .box-3 {
     width: 100%;
     margin: 0 0 2rem 0;
-    max-width: 350px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   /* Food Menu Mobile - 1 card per row */
@@ -1781,13 +2290,186 @@ html {
 
   /* Categories - 4 cards per row on large screens */
   .box-3 {
-    width: 22%;
-    margin: 1.5%;
+    width: auto; /* let grid define columns on very large screens */
+    margin: 0;
   }
 
   /* Food Menu - 3 cards per row with more space */
   .food-menu-box {
-    width: 30%;
-    margin: 1.5%;
+    width: auto; /* rely on grid for layout */
+    margin: 0;
   }
+}
+
+/* Card caption backdrop for better contrast on images */
+.float-text {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.2));
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 1rem;
+}
+
+/* Entrance utility for subtle staggered reveals */
+.card-entrance {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+.card-entrance:nth-child(1) {
+  animation-delay: 0.06s;
+}
+.card-entrance:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.card-entrance:nth-child(3) {
+  animation-delay: 0.18s;
+}
+
+/* Ensure badges don't overlap on very small screens */
+@media only screen and (max-width: 480px) {
+  .badge {
+    top: 8px;
+    right: 8px;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+  .float-text {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+/* Glassmorphism Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(var(--bg-rgb-light), 0.15);
+  backdrop-filter: blur(35px) saturate(1.6) brightness(1.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: background 0.3s ease, backdrop-filter 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(var(--bg-rgb-light), 0.25);
+  backdrop-filter: blur(40px) saturate(1.8) brightness(1.15);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode support */
+body.dark-mode .navbar {
+  background: rgba(var(--bg-rgb-dark), 0.15);
+}
+
+body.dark-mode .navbar.scrolled {
+  background: rgba(var(--bg-rgb-dark), 0.25);
+}
+
+/* Compact navbar override — placed late to override earlier values */
+:root {
+  --navbar-height: 48px; /* compact universal navbar height (desktop) */
+}
+
+/* Enforce compact sizing */
+.navbar {
+  height: var(--navbar-height) !important;
+  min-height: var(--navbar-height) !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  align-items: center;
+}
+
+/* Make container align to full navbar height */
+.navbar .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Scale logo to fit the compact navbar */
+.navbar .logo img {
+  max-height: calc(var(--navbar-height) - 12px);
+  width: auto;
+  display: block;
+}
+
+/* Tighter mobile toggle size */
+.mobile-menu-toggle {
+  width: calc(var(--navbar-height) - 12px);
+  height: calc(var(--navbar-height) - 12px);
+  padding: 4px;
+}
+
+/* Ensure menu/controls still fit inside the compact navbar */
+.navbar .menu,
+.navbar .navbar-controls {
+  margin-top: 0;
+}
+
+/* Responsive reductions */
+@media only screen and (max-width: 768px) {
+  :root {
+    --navbar-height: 44px;
+  }
+  .navbar .logo img {
+    max-height: calc(var(--navbar-height) - 10px);
+  }
+  .mobile-menu-toggle {
+    width: calc(var(--navbar-height) - 10px);
+    height: calc(var(--navbar-height) - 10px);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  :root {
+    --navbar-height: 40px;
+  }
+  .navbar .logo img {
+    max-height: calc(var(--navbar-height) - 8px);
+  }
+  .mobile-menu-toggle {
+    width: calc(var(--navbar-height) - 8px);
+    height: calc(var(--navbar-height) - 8px);
+  }
+}
+
+/* Navbar link contrast fixes to avoid purple-on-purple collisions */
+/* Apply dark text for navbar links in light mode and keep light text in dark mode */
+/* Default (light) */
+.navbar a,
+.navbar .menu ul li a,
+.navbar .menu ul li a:link,
+.navbar .menu ul li a:visited,
+.navbar .theme-toggle,
+.navbar .language-selector {
+  color: var(--text-primary) !important;
+}
+
+/* Make sure logo link text (if any) is also dark in light mode */
+.navbar .logo a,
+.navbar .logo a:hover {
+  color: var(--text-primary) !important;
+}
+
+/* Active link styling: readable on glass background */
+.navbar .menu ul li a.active {
+  background: linear-gradient(
+    90deg,
+    rgba(108, 92, 231, 0.95),
+    rgba(99, 102, 241, 0.95)
+  );
+  color: var(--text-white) !important;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+/* Dark mode: use light text on navbar */
+html[data-theme="dark"] .navbar a,
+body.dark-mode .navbar a,
+html[data-theme="dark"] .navbar .theme-toggle,
+body.dark-mode .navbar .theme-toggle {
+  color: var(--text-white) !important;
 }

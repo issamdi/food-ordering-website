@@ -33,13 +33,23 @@
         </div>
 
         <!-- Mobile Menu Toggle Button -->
-        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <button
+          class="mobile-menu-toggle"
+          aria-controls="navbar-menu navbar-controls"
+          aria-expanded="false"
+          onclick="toggleMobileMenu()"
+        >
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
         </button>
 
-        <div class="menu text-right" id="navbar-menu">
+        <div
+          class="menu text-right"
+          id="navbar-menu"
+          role="navigation"
+          aria-hidden="true"
+        >
           <ul>
             <li>
               <a href="index.html" data-translate="home">Home</a>
@@ -84,7 +94,7 @@
     </section>
     <!-- Navbar Section Ends Here -->
 
-    <!-- fOOD sEARCH Section Starts Here -->
+    <!-- Add spacing between navbar and food-search section -->
     <section class="food-search text-center">
       <div class="container">
         <form action="food-search.html" method="POST">
@@ -110,7 +120,7 @@
       <div class="container">
         <h2 class="text-center">Food Menu</h2>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-pizza.jpg"
@@ -131,7 +141,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-burger.jpg"
@@ -152,7 +162,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-burger.jpg"
@@ -173,7 +183,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-pizza.jpg"
@@ -194,7 +204,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-pizza.jpg"
@@ -215,7 +225,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-momo.jpg"

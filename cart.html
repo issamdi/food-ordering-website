@@ -33,13 +33,23 @@
         </div>
 
         <!-- Mobile Menu Toggle Button -->
-        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <button
+          class="mobile-menu-toggle"
+          aria-controls="navbar-menu navbar-controls"
+          aria-expanded="false"
+          onclick="toggleMobileMenu()"
+        >
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
         </button>
 
-        <div class="menu text-right" id="navbar-menu">
+        <div
+          class="menu text-right"
+          id="navbar-menu"
+          role="navigation"
+          aria-hidden="true"
+        >
           <ul>
             <li>
               <a href="index.html" data-translate="home">Home</a>
@@ -147,7 +157,7 @@
               href="foods.html"
               class="btn btn-primary"
               data-translate="browseFood"
-              >Browse Foods</a
+              >Browse Food</a
             >
           </div>
         </div>

@@ -32,7 +32,24 @@
           </a>
         </div>
 
-        <div class="menu text-right">
+        <!-- Mobile Menu Toggle Button -->
+        <button
+          class="mobile-menu-toggle"
+          aria-controls="navbar-menu navbar-controls"
+          aria-expanded="false"
+          onclick="toggleMobileMenu()"
+        >
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+
+        <div
+          class="menu text-right"
+          id="navbar-menu"
+          role="navigation"
+          aria-hidden="true"
+        >
           <ul>
             <li>
               <a href="index.html">Home</a>
@@ -41,7 +58,7 @@
               <a href="categories.html">Categories</a>
             </li>
             <li>
-              <a href="foods.html">Foods</a>
+              <a href="foods.html">Food</a>
             </li>
             <li>
               <a href="#">Contact</a>
@@ -61,7 +78,7 @@
     <!-- fOOD sEARCH Section Starts Here -->
     <section class="food-search text-center">
       <div class="container">
-        <h2>Foods on <a href="#" class="text-white">"Category"</a></h2>
+        <h2>Food on <a href="#" class="text-white">"Category"</a></h2>
       </div>
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
@@ -71,7 +88,7 @@
       <div class="container">
         <h2 class="text-center">Food Menu</h2>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-pizza.jpg"
@@ -92,7 +109,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-burger.jpg"
@@ -113,7 +130,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-burger.jpg"
@@ -134,7 +151,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-pizza.jpg"
@@ -155,7 +172,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-pizza.jpg"
@@ -176,7 +193,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-momo.jpg"

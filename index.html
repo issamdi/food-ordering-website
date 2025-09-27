@@ -33,13 +33,23 @@
         </div>
 
         <!-- Mobile Menu Toggle Button -->
-        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <button
+          class="mobile-menu-toggle"
+          aria-controls="navbar-menu navbar-controls"
+          aria-expanded="false"
+          onclick="toggleMobileMenu()"
+        >
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
         </button>
 
-        <div class="menu text-right" id="navbar-menu">
+        <div
+          class="menu text-right"
+          id="navbar-menu"
+          role="navigation"
+          aria-hidden="true"
+        >
           <ul>
             <li>
               <a href="index.html" data-translate="home">Home</a>
@@ -110,44 +120,50 @@
     <section class="categories">
       <div class="container">
         <h2 class="text-center" data-translate="categoriesTitle">
-          Explore Foods
+          Explore Food
         </h2>
 
         <a href="category-foods.html">
-          <div class="box-3 float-container">
+          <div class="box-3 float-container card-entrance">
             <img
               src="images/pizza.jpg"
               alt="Pizza"
               class="img-responsive img-curve"
             />
+            <span class="badge" aria-hidden="true">New</span>
 
             <h3 class="float-text text-white" data-translate="pizza">Pizza</h3>
+            <span class="sr-only">New category</span>
           </div>
         </a>
 
         <a href="#">
-          <div class="box-3 float-container">
+          <div class="box-3 float-container card-entrance">
             <img
               src="images/burger.jpg"
               alt="Burger"
               class="img-responsive img-curve"
             />
+            <span class="badge" aria-hidden="true">Popular</span>
 
             <h3 class="float-text text-white" data-translate="burger">
               Burger
             </h3>
+            <span class="sr-only">Popular category</span>
           </div>
         </a>
 
         <a href="#">
-          <div class="box-3 float-container">
+          <div class="box-3 float-container card-entrance">
             <img
               src="images/momo.jpg"
               alt="Momo"
               class="img-responsive img-curve"
             />
+            <span class="badge" aria-hidden="true">Hot</span>
 
             <h3 class="float-text text-white" data-translate="momo">Momo</h3>
+            <span class="sr-only">Hot category</span>
           </div>
         </a>
 
@@ -161,11 +177,11 @@
       <div class="container">
         <h2 class="text-center">Food Menu</h2>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-pizza.jpg"
-              alt="Chicke Hawain Pizza"
+              alt="Pepperoni Pizza"
               class="img-responsive img-curve"
             />
           </div>
@@ -182,7 +198,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-burger.jpg"
@@ -203,7 +219,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-burger.jpg"
@@ -224,7 +240,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-pizza.jpg"
@@ -246,7 +262,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-pizza.jpg"
@@ -267,7 +283,7 @@
           </div>
         </div>
 
-        <div class="food-menu-box">
+        <div class="food-menu-box card-entrance">
           <div class="food-menu-img">
             <img
               src="images/menu-momo.jpg"
@@ -293,7 +309,7 @@
       </div>
 
       <p class="text-center">
-        <a href="foods.html">See All Foods</a>
+        <a href="foods.html">See All Food</a>
       </p>
     </section>
     <!-- fOOD Menu Section Ends Here -->
