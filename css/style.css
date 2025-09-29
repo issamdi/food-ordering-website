@@ -1139,6 +1139,23 @@ button:focus-visible {
   }
 }
 
+/* Increase navbar height slightly for better spacing */
+:root {
+  --navbar-height: 56px; /* increased from 48px to 56px */
+}
+
+@media only screen and (max-width: 768px) {
+  :root {
+    --navbar-height: 48px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  :root {
+    --navbar-height: 44px;
+  }
+}
+
 /* Loading Animation */
 @keyframes fadeInUp {
   from {
@@ -2370,7 +2387,7 @@ body.dark-mode .navbar.scrolled {
 
 /* Compact navbar override — placed late to override earlier values */
 :root {
-  --navbar-height: 48px; /* compact universal navbar height (desktop) */
+  --navbar-height: 56px; /* increased from 48px to 56px */
 }
 
 /* Enforce compact sizing */
@@ -2412,7 +2429,7 @@ body.dark-mode .navbar.scrolled {
 /* Responsive reductions */
 @media only screen and (max-width: 768px) {
   :root {
-    --navbar-height: 44px;
+    --navbar-height: 48px;
   }
   .navbar .logo img {
     max-height: calc(var(--navbar-height) - 10px);
@@ -2425,7 +2442,7 @@ body.dark-mode .navbar.scrolled {
 
 @media only screen and (max-width: 480px) {
   :root {
-    --navbar-height: 40px;
+    --navbar-height: 44px;
   }
   .navbar .logo img {
     max-height: calc(var(--navbar-height) - 8px);
