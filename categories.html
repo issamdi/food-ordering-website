@@ -1,15 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Restaurant Website</title>
-
-    <!-- Link our CSS file -->
+    <title>Categories - Restaurant Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    />
     <link rel="stylesheet" href="css/style.css" />
-
-    <!-- Prevent theme flash by applying saved theme immediately -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <script>
       (function () {
         const savedTheme = localStorage.getItem("theme") || "light";
@@ -19,20 +24,16 @@
   </head>
 
   <body>
-    <!-- Navbar Section Starts Here -->
-    <section class="navbar">
-      <div class="container">
-        <div class="logo">
-          <a href="index.html" title="Go to Home Page">
-            <img
-              src="images/logo.png"
-              alt="Restaurant Logo"
-              class="img-responsive"
-            />
-          </a>
-        </div>
+    <div class="glass-edge-top"></div>
+    <div class="glass-edge-bottom"></div>
+    <div class="cursor-glow"></div>
 
-        <!-- Mobile Menu Toggle Button -->
+    <nav class="navbar">
+      <div class="nav-content">
+        <a href="index.html" class="nav-logo" title="Go to Home Page">
+          <img src="images/logo.png" alt="Restaurant Logo" />
+        </a>
+
         <button
           class="mobile-menu-toggle"
           aria-controls="navbar-menu navbar-controls"
@@ -44,40 +45,29 @@
           <span class="hamburger-line"></span>
         </button>
 
-        <div
-          class="menu text-right"
+        <ul
+          class="nav-links"
           id="navbar-menu"
           role="navigation"
           aria-hidden="true"
         >
-          <ul>
-            <li>
-              <a href="index.html" data-translate="home">Home</a>
-            </li>
-            <li>
-              <a
-                href="categories.html"
-                class="active"
-                data-translate="categories"
-                >Categories</a
-              >
-            </li>
-            <li>
-              <a href="foods.html" data-translate="food">Food</a>
-            </li>
-            <li>
-              <a href="cart.html"
-                ><span data-translate="myOrders">My Orders</span>
-                <span class="cart-counter">0</span></a
-              >
-            </li>
-            <li>
-              <a href="#contact" data-translate="contact">Contact</a>
-            </li>
-          </ul>
-        </div>
+          <li><a href="index.html" data-translate="home">Home</a></li>
+          <li>
+            <a href="categories.html" class="active" data-translate="categories"
+              >Categories</a
+            >
+          </li>
+          <li><a href="foods.html" data-translate="food">Food</a></li>
+          <li>
+            <a href="cart.html"
+              ><span data-translate="myOrders">My Orders</span>
+              <span class="cart-counter">0</span></a
+            >
+          </li>
+          <li><a href="#contact" data-translate="contact">Contact</a></li>
+        </ul>
 
-        <div class="navbar-controls" id="navbar-controls">
+        <div class="nav-controls" id="navbar-controls">
           <select
             class="language-selector"
             onchange="changeLanguage(this.value)"
@@ -86,22 +76,27 @@
             <option value="fr">FR</option>
             <option value="ar">AR</option>
           </select>
-
-          <div class="theme-toggle" onclick="toggleTheme()">
+          <button class="theme-toggle" onclick="toggleTheme()">
             <span class="icon">🌙</span>
-          </div>
+          </button>
         </div>
-
-        <div class="clearfix"></div>
       </div>
-    </section>
-    <!-- Navbar Section Ends Here -->
+    </nav>
 
-    <!-- Inserted Food Search hero (same as food-search.html) -->
-    <section class="food-search text-center">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h2 data-translate="categoriesTitle">Explore Food</h2>
+    </div>
+
+    <!-- Search -->
+    <section class="section" style="padding-top: 0">
       <div class="container">
-        <h2 data-translate="categoriesTitle">Explore Food</h2>
-        <form action="food-search.html" method="POST">
+        <form
+          action="food-search.html"
+          method="POST"
+          class="hero-search-form"
+          style="max-width: 600px; margin: 0 auto"
+        >
           <input
             type="search"
             name="search"
@@ -109,234 +104,134 @@
             placeholder="Search for Food.."
             required
           />
-          <button type="submit" class="btn btn-primary" data-translate="search">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            data-translate="searchBtn"
+          >
             Search
           </button>
         </form>
       </div>
     </section>
 
-    <!-- CAtegories Section Starts Here -->
-    <section class="categories">
+    <!-- Categories Grid -->
+    <section class="section">
       <div class="container">
-        <h2 class="text-center" data-translate="categoriesTitle">
-          Explore Food
-        </h2>
+        <div class="categories-grid stagger-reveal">
+          <a href="category-foods.html" class="category-card">
+            <img src="images/pizza.jpg" alt="Pizza" class="category-card-img" />
+            <span class="category-badge">New</span>
+            <div class="category-card-overlay"><h3>Pizza</h3></div>
+          </a>
 
-        <a href="category-foods.html">
-          <div class="box-3 float-container card-entrance">
-            <img
-              src="images/pizza.jpg"
-              alt="Pizza"
-              class="img-responsive img-curve"
-            />
-            <span class="badge" aria-hidden="true">New</span>
-
-            <h3 class="float-text text-white">Pizza</h3>
-            <span class="sr-only">New category</span>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
+          <a href="category-foods.html" class="category-card">
             <img
               src="images/burger.jpg"
               alt="Burger"
-              class="img-responsive img-curve"
+              class="category-card-img"
             />
-            <span class="badge" aria-hidden="true">Popular</span>
+            <span class="category-badge">Popular</span>
+            <div class="category-card-overlay"><h3>Burger</h3></div>
+          </a>
 
-            <h3 class="float-text text-white">Burger</h3>
-            <span class="sr-only">Popular category</span>
-          </div>
-        </a>
+          <a href="category-foods.html" class="category-card">
+            <img src="images/momo.jpg" alt="Momo" class="category-card-img" />
+            <span class="category-badge">Hot</span>
+            <div class="category-card-overlay"><h3>Momo</h3></div>
+          </a>
 
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
+          <a href="category-foods.html" class="category-card">
             <img
-              src="images/momo.jpg"
-              alt="Momo"
-              class="img-responsive img-curve"
+              src="images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg"
+              alt="Grilled Chicken"
+              class="category-card-img"
             />
-            <span class="badge" aria-hidden="true">Hot</span>
+            <span class="category-badge">Chef's Pick</span>
+            <div class="category-card-overlay"><h3>Grilled Chicken</h3></div>
+          </a>
 
-            <h3 class="float-text text-white">Momo</h3>
-            <span class="sr-only">Hot category</span>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
+          <a href="category-foods.html" class="category-card">
             <img
-              src="images/pizza.jpg"
-              alt="Pizza"
-              class="img-responsive img-curve"
+              src="images/lavash-rolls-top-view-table.jpg"
+              alt="Wraps"
+              class="category-card-img"
             />
-            <span class="badge" aria-hidden="true">New</span>
+            <span class="category-badge">Trending</span>
+            <div class="category-card-overlay"><h3>Wraps</h3></div>
+          </a>
 
-            <h3 class="float-text text-white">Pizza</h3>
-            <span class="sr-only">New category</span>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
+          <a href="category-foods.html" class="category-card">
             <img
-              src="images/burger.jpg"
-              alt="Burger"
-              class="img-responsive img-curve"
+              src="images/colorful-bowl-of-deliciousness-with-fried-egg-RaPUELLHgqFnS9zI85BpU.webp"
+              alt="Bowls"
+              class="category-card-img"
             />
-            <span class="badge" aria-hidden="true">Popular</span>
+            <span class="category-badge">Healthy</span>
+            <div class="category-card-overlay"><h3>Bowls</h3></div>
+          </a>
 
-            <h3 class="float-text text-white">Burger</h3>
-            <span class="sr-only">Popular category</span>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
+          <a href="category-foods.html" class="category-card">
             <img
-              src="images/momo.jpg"
-              alt="Momo"
-              class="img-responsive img-curve"
+              src="images/potato-patties-topped-with-beef-patties-shoe-strings.jpg"
+              alt="Patties"
+              class="category-card-img"
             />
-            <span class="badge" aria-hidden="true">Hot</span>
-
-            <h3 class="float-text text-white">Momo</h3>
-            <span class="sr-only">Hot category</span>
-          </div>
-        </a>
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
-            <img
-              src="images/pizza.jpg"
-              alt="Pizza"
-              class="img-responsive img-curve"
-            />
-            <span class="badge" aria-hidden="true">New</span>
-
-            <h3 class="float-text text-white">Pizza</h3>
-            <span class="sr-only">New category</span>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
-            <img
-              src="images/burger.jpg"
-              alt="Burger"
-              class="img-responsive img-curve"
-            />
-            <span class="badge" aria-hidden="true">Popular</span>
-
-            <h3 class="float-text text-white">Burger</h3>
-            <span class="sr-only">Popular category</span>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
-            <img
-              src="images/momo.jpg"
-              alt="Momo"
-              class="img-responsive img-curve"
-            />
-            <span class="badge" aria-hidden="true">Hot</span>
-
-            <h3 class="float-text text-white">Momo</h3>
-            <span class="sr-only">Hot category</span>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
-            <img
-              src="images/pizza.jpg"
-              alt="Pizza"
-              class="img-responsive img-curve"
-            />
-            <span class="badge" aria-hidden="true">New</span>
-
-            <h3 class="float-text text-white">Pizza</h3>
-            <span class="sr-only">New category</span>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
-            <img
-              src="images/burger.jpg"
-              alt="Burger"
-              class="img-responsive img-curve"
-            />
-            <span class="badge" aria-hidden="true">Popular</span>
-
-            <h3 class="float-text text-white">Burger</h3>
-            <span class="sr-only">Popular category</span>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="box-3 float-container card-entrance">
-            <img
-              src="images/momo.jpg"
-              alt="Momo"
-              class="img-responsive img-curve"
-            />
-            <span class="badge" aria-hidden="true">Hot</span>
-
-            <h3 class="float-text text-white">Momo</h3>
-            <span class="sr-only">Hot category</span>
-          </div>
-        </a>
-
-        <div class="clearfix"></div>
+            <span class="category-badge">Classic</span>
+            <div class="category-card-overlay"><h3>Patties</h3></div>
+          </a>
+        </div>
       </div>
     </section>
-    <!-- Categories Section Ends Here -->
 
-    <!-- social Section Starts Here -->
-    <section class="social" id="contact">
-      <div class="container text-center">
-        <ul>
+    <!-- Contact / Social -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <h2 class="section-title" data-translate="followUs">Follow Us</h2>
+        <ul class="social-links">
           <li>
-            <a href="#" title="Facebook">
-              <img
+            <a href="#" title="Facebook"
+              ><img
                 src="https://img.icons8.com/color/48/facebook-new.png"
                 alt="Facebook"
-              />
-            </a>
+            /></a>
           </li>
           <li>
-            <a href="#" title="Instagram">
-              <img
+            <a href="#" title="Instagram"
+              ><img
                 src="https://img.icons8.com/color/48/instagram-new.png"
                 alt="Instagram"
-              />
-            </a>
+            /></a>
           </li>
           <li>
-            <a href="#" title="X (Twitter)">
-              <img
+            <a href="#" title="X (Twitter)"
+              ><img
                 src="https://img.icons8.com/color/48/twitterx--v1.png"
                 alt="X (Twitter)"
-              />
-            </a>
+            /></a>
           </li>
         </ul>
       </div>
     </section>
-    <!-- social Section Ends Here -->
 
-    <!-- footer Section Starts Here -->
-    <section class="footer">
+    <footer class="footer">
       <div class="container text-center">
-        <p>All rights reserved. Designed By <a href="#">ID</a></p>
+        <p>
+          All rights reserved. Designed By
+          <a
+            href="https://issamdaoudi.site"
+            target="_blank"
+            rel="noopener noreferrer"
+            >ID</a
+          >
+        </p>
       </div>
-    </section>
-    <!-- footer Section Ends Here -->
+    </footer>
 
-    <!-- JavaScript -->
+    <button class="scroll-top-btn" aria-label="Scroll to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="js/script.js"></script>
   </body>
 </html>

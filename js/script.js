@@ -56,9 +56,10 @@ function initializeSmoothScrolling() {
 
   links.forEach((link) => {
     link.addEventListener("click", function (e) {
-      e.preventDefault();
-
       const targetId = this.getAttribute("href");
+      if (!targetId || targetId === "#") return;
+
+      e.preventDefault();
       const targetSection = document.querySelector(targetId);
 
       if (targetSection) {
@@ -71,7 +72,7 @@ function initializeSmoothScrolling() {
   });
 }
 
-// Add fade-in animation on scroll
+// Scroll-reveal animations via IntersectionObserver
 function initializeScrollAnimations() {
   const observerOptions = {
     threshold: 0.1,
@@ -81,42 +82,170 @@ function initializeScrollAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("fade-in-up");
+        entry.target.classList.add("visible");
       }
     });
   }, observerOptions);
 
-  // Observe all sections and food menu boxes
+  // Observe sections, cards, and glass elements
   const elementsToAnimate = document.querySelectorAll(
-    ".categories, .food-menu-box, .box-3"
+    ".section, .food-card, .category-card, .glass-card, .cart-section, .checkout-section, .order-section",
   );
   elementsToAnimate.forEach((el) => observer.observe(el));
 }
 
-// Enhanced search functionality
+// Food catalog — all available food items
+const foodCatalog = [
+  {
+    name: "Margherita Pizza",
+    price: 11.75,
+    image: "images/pizza.jpg",
+    detail:
+      "Classic Italian pizza with fresh mozzarella, basil, and rich tomato sauce on a crispy thin crust.",
+  },
+  {
+    name: "Smoky BBQ Burger",
+    price: 9.5,
+    image: "images/burger.jpg",
+    detail:
+      "Juicy beef patty with smoky BBQ sauce, caramelized onions, cheddar cheese, and crisp lettuce.",
+  },
+  {
+    name: "Chicken Steam Momo",
+    price: 7.25,
+    image: "images/momo.jpg",
+    detail:
+      "Traditional steamed dumplings filled with seasoned chicken, ginger, garlic, and fresh herbs.",
+  },
+  {
+    name: "Grilled Chicken Plate",
+    price: 13.99,
+    image:
+      "images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg",
+    detail:
+      "Tender grilled chicken breast served with warm bread, fresh greens, peppers, and a zesty spice sauce.",
+  },
+  {
+    name: "Lavash Wraps",
+    price: 8.99,
+    image: "images/lavash-rolls-top-view-table.jpg",
+    detail:
+      "Soft lavash bread rolled with seasoned meat, fresh vegetables, herbs, and a creamy garlic sauce.",
+  },
+  {
+    name: "Colorful Power Bowl",
+    price: 10.5,
+    image:
+      "images/colorful-bowl-of-deliciousness-with-fried-egg-RaPUELLHgqFnS9zI85BpU.webp",
+    detail:
+      "A vibrant bowl loaded with fresh veggies, grains, a perfectly fried egg, and a tangy dressing.",
+  },
+  {
+    name: "Beef & Potato Patties",
+    price: 10.25,
+    image: "images/potato-patties-topped-with-beef-patties-shoe-strings.jpg",
+    detail:
+      "Golden potato patties topped with seasoned beef, crispy shoestring fries, and a savory drizzle.",
+  },
+];
+
+// Search functionality
 function initializeSearchEnhancements() {
   const searchInput = document.querySelector('input[type="search"]');
 
   if (searchInput) {
-    // Add search suggestions (placeholder for future enhancement)
-    searchInput.addEventListener("input", function (e) {
-      const query = e.target.value.toLowerCase();
-      // This can be enhanced with actual search functionality
-      console.log("Searching for:", query);
-    });
-
-    // Add search on Enter key
     searchInput.addEventListener("keypress", function (e) {
       if (e.key === "Enter") {
+        const form = searchInput.closest("form");
+        if (form) return; // let the form submit naturally
         e.preventDefault();
-        const query = e.target.value;
-        if (query.trim()) {
-          // For now, just show an alert. Can be enhanced with actual search
-          alert(`Searching for: ${query}`);
+        const query = searchInput.value.trim();
+        if (query) {
+          window.location.href =
+            "food-search.html?search=" + encodeURIComponent(query);
         }
       }
     });
   }
+
+  // If we're on the search results page, run the search
+  if (document.getElementById("search-results")) {
+    runFoodSearch();
+  }
+}
+
+function runFoodSearch() {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get("search") || "";
+  const resultsContainer = document.getElementById("search-results");
+  const noResults = document.getElementById("no-results");
+  const queryDisplay = document.getElementById("search-query-display");
+  const searchInput = document.getElementById("search-input");
+
+  // Show the query in the header and input
+  if (queryDisplay) {
+    queryDisplay.textContent = '"' + query + '"';
+  }
+  if (searchInput) {
+    searchInput.value = query;
+  }
+
+  if (!query.trim()) {
+    resultsContainer.innerHTML = "";
+    if (noResults) noResults.style.display = "block";
+    return;
+  }
+
+  const searchTerm = query.toLowerCase();
+  const matches = foodCatalog.filter(function (food) {
+    return food.name.toLowerCase().includes(searchTerm);
+  });
+
+  if (matches.length === 0) {
+    resultsContainer.innerHTML = "";
+    if (noResults) noResults.style.display = "block";
+    return;
+  }
+
+  if (noResults) noResults.style.display = "none";
+
+  resultsContainer.innerHTML = matches
+    .map(function (food) {
+      var safeName = food.name
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      var safeDetail = food.detail
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      return (
+        '<div class="food-card food-menu-box">' +
+        '<div class="food-card-img-wrapper">' +
+        '<img src="' +
+        food.image +
+        '" alt="' +
+        safeName +
+        '" class="food-card-img" />' +
+        "</div>" +
+        '<div class="food-card-body">' +
+        "<h4>" +
+        safeName +
+        "</h4>" +
+        '<p class="food-price">$' +
+        food.price.toFixed(2) +
+        "</p>" +
+        '<p class="food-detail">' +
+        safeDetail +
+        "</p>" +
+        '<div class="food-card-actions">' +
+        '<a href="#" class="btn btn-primary" data-translate="orderNow">Order Now</a>' +
+        "</div>" +
+        "</div>" +
+        "</div>"
+      );
+    })
+    .join("");
 }
 
 // Shopping cart functionality (basic implementation)
@@ -234,7 +363,7 @@ if (!document.querySelector("#notification-styles")) {
   style.id = "notification-styles";
   style.textContent = `
         .notification {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 500;
             font-size: 0.9rem;
         }
@@ -242,43 +371,8 @@ if (!document.querySelector("#notification-styles")) {
   document.head.appendChild(style);
 }
 
-// Smooth Scrolling for Anchor Links
-function initializeSmoothScrolling() {
-  // Add smooth scrolling behavior to all anchor links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute("href").substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        // Calculate offset for fixed navbar
-        const navbarHeight =
-          document.querySelector(".navbar")?.offsetHeight || 0;
-        const targetPosition = targetElement.offsetTop - navbarHeight - 20; // 20px extra padding
-
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
-        });
-
-        // Optional: Add a subtle highlight effect to the target section
-        targetElement.style.transition = "background-color 0.3s ease";
-        const originalBg = getComputedStyle(targetElement).backgroundColor;
-        targetElement.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
-
-        setTimeout(() => {
-          targetElement.style.backgroundColor = originalBg;
-        }, 1000);
-      }
-    });
-  });
-}
-
 // Initialize smooth scrolling when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
-  initializeSmoothScrolling();
   loadSavedLanguage();
 });
 
@@ -542,7 +636,7 @@ function translatePage(language) {
 
   // Handle placeholders
   const inputElements = document.querySelectorAll(
-    "[data-translate-placeholder]"
+    "[data-translate-placeholder]",
   );
   inputElements.forEach((element) => {
     const key = element.getAttribute("data-translate-placeholder");
@@ -602,7 +696,7 @@ function toggleMobileMenu() {
         ) {
           controls._originalParent.insertBefore(
             controls,
-            controls._originalNext
+            controls._originalNext,
           );
         } else {
           controls._originalParent.appendChild(controls);
@@ -684,13 +778,57 @@ window.addEventListener("resize", function () {
 window.toggleMobileMenu = toggleMobileMenu;
 window.closeMobileMenu = closeMobileMenu;
 
-// Scroll detection for glassmorphism navbar
-const navbar = document.querySelector('.navbar');
+// Scroll detection for glassmorphism navbar & scroll-to-top button
+document.addEventListener("DOMContentLoaded", function () {
+  const navbar = document.querySelector(".navbar");
+  const scrollTopBtn = document.querySelector(".scroll-top-btn");
 
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
+  window.addEventListener("scroll", () => {
+    // Navbar scrolled state
+    if (navbar) {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    }
+    // Scroll-to-top button visibility
+    if (scrollTopBtn) {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.add("visible");
+      } else {
+        scrollTopBtn.classList.remove("visible");
+      }
+    }
+  });
+
+  // Scroll-to-top click handler
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // Cursor glow tracking
+  const cursorGlow = document.querySelector(".cursor-glow");
+  if (cursorGlow) {
+    let mouseX = 0,
+      mouseY = 0;
+    let glowX = 0,
+      glowY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateGlow() {
+      glowX += (mouseX - glowX) * 0.15;
+      glowY += (mouseY - glowY) * 0.15;
+      cursorGlow.style.left = glowX + "px";
+      cursorGlow.style.top = glowY + "px";
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
   }
 });

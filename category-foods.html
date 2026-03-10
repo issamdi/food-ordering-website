@@ -1,15 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Restaurant Website</title>
-
-    <!-- Link our CSS file -->
+    <title>Category Foods - Restaurant Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    />
     <link rel="stylesheet" href="css/style.css" />
-
-    <!-- Prevent theme flash by applying saved theme immediately -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <script>
       (function () {
         const savedTheme = localStorage.getItem("theme") || "light";
@@ -19,20 +24,16 @@
   </head>
 
   <body>
-    <!-- Navbar Section Starts Here -->
-    <section class="navbar">
-      <div class="container">
-        <div class="logo">
-          <a href="#" title="Logo">
-            <img
-              src="images/logo.png"
-              alt="Restaurant Logo"
-              class="img-responsive"
-            />
-          </a>
-        </div>
+    <div class="glass-edge-top"></div>
+    <div class="glass-edge-bottom"></div>
+    <div class="cursor-glow"></div>
 
-        <!-- Mobile Menu Toggle Button -->
+    <nav class="navbar">
+      <div class="nav-content">
+        <a href="index.html" class="nav-logo" title="Go to Home Page">
+          <img src="images/logo.png" alt="Restaurant Logo" />
+        </a>
+
         <button
           class="mobile-menu-toggle"
           aria-controls="navbar-menu navbar-controls"
@@ -44,223 +45,284 @@
           <span class="hamburger-line"></span>
         </button>
 
-        <div
-          class="menu text-right"
+        <ul
+          class="nav-links"
           id="navbar-menu"
           role="navigation"
           aria-hidden="true"
         >
-          <ul>
-            <li>
-              <a href="index.html">Home</a>
-            </li>
-            <li>
-              <a href="categories.html">Categories</a>
-            </li>
-            <li>
-              <a href="foods.html">Food</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="theme-toggle" onclick="toggleTheme()">
-          <span class="icon">🌙</span>
-        </div>
-
-        <div class="clearfix"></div>
-      </div>
-    </section>
-    <!-- Navbar Section Ends Here -->
-
-    <!-- fOOD sEARCH Section Starts Here -->
-    <section class="food-search text-center">
-      <div class="container">
-        <h2>Food on <a href="#" class="text-white">"Category"</a></h2>
-      </div>
-    </section>
-    <!-- fOOD sEARCH Section Ends Here -->
-
-    <!-- fOOD MEnu Section Starts Here -->
-    <section class="food-menu">
-      <div class="container">
-        <h2 class="text-center">Food Menu</h2>
-
-        <div class="food-menu-box card-entrance">
-          <div class="food-menu-img">
-            <img
-              src="images/menu-pizza.jpg"
-              alt="Chicke Hawain Pizza"
-              class="img-responsive img-curve"
-            />
-          </div>
-
-          <div class="food-menu-desc">
-            <h4>Food Title</h4>
-            <p class="food-price">$2.3</p>
-            <p class="food-detail">
-              Made with Italian Sauce, Chicken, and organice vegetables.
-            </p>
-            <br />
-
-            <a href="#" class="btn btn-primary">Order Now</a>
-          </div>
-        </div>
-
-        <div class="food-menu-box card-entrance">
-          <div class="food-menu-img">
-            <img
-              src="images/menu-burger.jpg"
-              alt="Chicke Hawain Pizza"
-              class="img-responsive img-curve"
-            />
-          </div>
-
-          <div class="food-menu-desc">
-            <h4>Smoky Burger</h4>
-            <p class="food-price">$2.3</p>
-            <p class="food-detail">
-              Made with Italian Sauce, Chicken, and organice vegetables.
-            </p>
-            <br />
-
-            <a href="#" class="btn btn-primary">Order Now</a>
-          </div>
-        </div>
-
-        <div class="food-menu-box card-entrance">
-          <div class="food-menu-img">
-            <img
-              src="images/menu-burger.jpg"
-              alt="Chicke Hawain Burger"
-              class="img-responsive img-curve"
-            />
-          </div>
-
-          <div class="food-menu-desc">
-            <h4>Nice Burger</h4>
-            <p class="food-price">$2.3</p>
-            <p class="food-detail">
-              Made with Italian Sauce, Chicken, and organice vegetables.
-            </p>
-            <br />
-
-            <a href="#" class="btn btn-primary">Order Now</a>
-          </div>
-        </div>
-
-        <div class="food-menu-box card-entrance">
-          <div class="food-menu-img">
-            <img
-              src="images/menu-pizza.jpg"
-              alt="Chicke Hawain Pizza"
-              class="img-responsive img-curve"
-            />
-          </div>
-
-          <div class="food-menu-desc">
-            <h4>Food Title</h4>
-            <p class="food-price">$2.3</p>
-            <p class="food-detail">
-              Made with Italian Sauce, Chicken, and organice vegetables.
-            </p>
-            <br />
-
-            <a href="#" class="btn btn-primary">Order Now</a>
-          </div>
-        </div>
-
-        <div class="food-menu-box card-entrance">
-          <div class="food-menu-img">
-            <img
-              src="images/menu-pizza.jpg"
-              alt="Chicke Hawain Pizza"
-              class="img-responsive img-curve"
-            />
-          </div>
-
-          <div class="food-menu-desc">
-            <h4>Food Title</h4>
-            <p class="food-price">$2.3</p>
-            <p class="food-detail">
-              Made with Italian Sauce, Chicken, and organice vegetables.
-            </p>
-            <br />
-
-            <a href="#" class="btn btn-primary">Order Now</a>
-          </div>
-        </div>
-
-        <div class="food-menu-box card-entrance">
-          <div class="food-menu-img">
-            <img
-              src="images/menu-momo.jpg"
-              alt="Chicke Hawain Momo"
-              class="img-responsive img-curve"
-            />
-          </div>
-
-          <div class="food-menu-desc">
-            <h4>Chicken Steam Momo</h4>
-            <p class="food-price">$2.3</p>
-            <p class="food-detail">
-              Made with Italian Sauce, Chicken, and organice vegetables.
-            </p>
-            <br />
-
-            <a href="#" class="btn btn-primary">Order Now</a>
-          </div>
-        </div>
-
-        <div class="clearfix"></div>
-      </div>
-    </section>
-    <!-- fOOD Menu Section Ends Here -->
-
-    <!-- social Section Starts Here -->
-    <section class="social">
-      <div class="container text-center">
-        <ul>
+          <li><a href="index.html" data-translate="home">Home</a></li>
           <li>
-            <a href="#" title="Facebook">
+            <a href="categories.html" data-translate="categories">Categories</a>
+          </li>
+          <li><a href="foods.html" data-translate="food">Food</a></li>
+          <li>
+            <a href="cart.html"
+              ><span data-translate="myOrders">My Orders</span>
+              <span class="cart-counter">0</span></a
+            >
+          </li>
+          <li><a href="#contact" data-translate="contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-controls" id="navbar-controls">
+          <select
+            class="language-selector"
+            onchange="changeLanguage(this.value)"
+          >
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+            <option value="ar">AR</option>
+          </select>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <span class="icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="page-header">
+      <h2>Food on <a href="#">"Category"</a></h2>
+    </div>
+
+    <!-- Food Menu -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-translate="foodTitle">Food Menu</h2>
+
+        <div class="food-grid stagger-reveal">
+          <div class="food-card food-menu-box">
+            <div class="food-card-img-wrapper">
               <img
+                src="images/pizza.jpg"
+                alt="Margherita Pizza"
+                class="food-card-img"
+              />
+            </div>
+            <div class="food-card-body">
+              <h4>Margherita Pizza</h4>
+              <p class="food-price">$11.75</p>
+              <p class="food-detail">
+                Classic Italian pizza with fresh mozzarella, basil, and rich
+                tomato sauce on a crispy thin crust.
+              </p>
+              <div class="food-card-actions">
+                <a
+                  href="order.html"
+                  class="btn btn-primary"
+                  data-translate="orderNow"
+                  >Order Now</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card food-menu-box">
+            <div class="food-card-img-wrapper">
+              <img
+                src="images/burger.jpg"
+                alt="Smoky BBQ Burger"
+                class="food-card-img"
+              />
+            </div>
+            <div class="food-card-body">
+              <h4>Smoky BBQ Burger</h4>
+              <p class="food-price">$9.50</p>
+              <p class="food-detail">
+                Juicy beef patty with smoky BBQ sauce, caramelized onions,
+                cheddar cheese, and crisp lettuce.
+              </p>
+              <div class="food-card-actions">
+                <a
+                  href="order.html"
+                  class="btn btn-primary"
+                  data-translate="orderNow"
+                  >Order Now</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card food-menu-box">
+            <div class="food-card-img-wrapper">
+              <img
+                src="images/momo.jpg"
+                alt="Chicken Steam Momo"
+                class="food-card-img"
+              />
+            </div>
+            <div class="food-card-body">
+              <h4>Chicken Steam Momo</h4>
+              <p class="food-price">$7.25</p>
+              <p class="food-detail">
+                Traditional steamed dumplings filled with seasoned chicken,
+                ginger, garlic, and fresh herbs.
+              </p>
+              <div class="food-card-actions">
+                <a
+                  href="order.html"
+                  class="btn btn-primary"
+                  data-translate="orderNow"
+                  >Order Now</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card food-menu-box">
+            <div class="food-card-img-wrapper">
+              <img
+                src="images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg"
+                alt="Grilled Chicken Plate"
+                class="food-card-img"
+              />
+            </div>
+            <div class="food-card-body">
+              <h4>Grilled Chicken Plate</h4>
+              <p class="food-price">$13.99</p>
+              <p class="food-detail">
+                Tender grilled chicken breast served with warm bread, fresh
+                greens, peppers, and a zesty spice sauce.
+              </p>
+              <div class="food-card-actions">
+                <a
+                  href="order.html"
+                  class="btn btn-primary"
+                  data-translate="orderNow"
+                  >Order Now</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card food-menu-box">
+            <div class="food-card-img-wrapper">
+              <img
+                src="images/lavash-rolls-top-view-table.jpg"
+                alt="Lavash Wraps"
+                class="food-card-img"
+              />
+            </div>
+            <div class="food-card-body">
+              <h4>Lavash Wraps</h4>
+              <p class="food-price">$8.99</p>
+              <p class="food-detail">
+                Soft lavash bread rolled with seasoned meat, fresh vegetables,
+                herbs, and a creamy garlic sauce.
+              </p>
+              <div class="food-card-actions">
+                <a
+                  href="order.html"
+                  class="btn btn-primary"
+                  data-translate="orderNow"
+                  >Order Now</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card food-menu-box">
+            <div class="food-card-img-wrapper">
+              <img
+                src="images/colorful-bowl-of-deliciousness-with-fried-egg-RaPUELLHgqFnS9zI85BpU.webp"
+                alt="Colorful Power Bowl"
+                class="food-card-img"
+              />
+            </div>
+            <div class="food-card-body">
+              <h4>Colorful Power Bowl</h4>
+              <p class="food-price">$10.50</p>
+              <p class="food-detail">
+                A vibrant bowl loaded with fresh veggies, grains, a perfectly
+                fried egg, and a tangy dressing.
+              </p>
+              <div class="food-card-actions">
+                <a
+                  href="order.html"
+                  class="btn btn-primary"
+                  data-translate="orderNow"
+                  >Order Now</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card food-menu-box">
+            <div class="food-card-img-wrapper">
+              <img
+                src="images/potato-patties-topped-with-beef-patties-shoe-strings.jpg"
+                alt="Beef &amp; Potato Patties"
+                class="food-card-img"
+              />
+            </div>
+            <div class="food-card-body">
+              <h4>Beef &amp; Potato Patties</h4>
+              <p class="food-price">$10.25</p>
+              <p class="food-detail">
+                Golden potato patties topped with seasoned beef, crispy
+                shoestring fries, and a savory drizzle.
+              </p>
+              <div class="food-card-actions">
+                <a
+                  href="order.html"
+                  class="btn btn-primary"
+                  data-translate="orderNow"
+                  >Order Now</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <h2 class="section-title" data-translate="followUs">Follow Us</h2>
+        <ul class="social-links">
+          <li>
+            <a href="#" title="Facebook"
+              ><img
                 src="https://img.icons8.com/color/48/facebook-new.png"
                 alt="Facebook"
-              />
-            </a>
+            /></a>
           </li>
           <li>
-            <a href="#" title="Instagram">
-              <img
+            <a href="#" title="Instagram"
+              ><img
                 src="https://img.icons8.com/color/48/instagram-new.png"
                 alt="Instagram"
-              />
-            </a>
+            /></a>
           </li>
           <li>
-            <a href="#" title="X (Twitter)">
-              <img
+            <a href="#" title="X (Twitter)"
+              ><img
                 src="https://img.icons8.com/color/48/twitterx--v1.png"
                 alt="X (Twitter)"
-              />
-            </a>
+            /></a>
           </li>
         </ul>
       </div>
     </section>
-    <!-- social Section Ends Here -->
 
-    <!-- footer Section Starts Here -->
-    <section class="footer">
+    <footer class="footer">
       <div class="container text-center">
-        <p>All rights reserved. Designed By <a href="#">ID</a></p>
+        <p>
+          All rights reserved. Designed By
+          <a
+            href="https://issamdaoudi.site"
+            target="_blank"
+            rel="noopener noreferrer"
+            >ID</a
+          >
+        </p>
       </div>
-    </section>
-    <!-- footer Section Ends Here -->
+    </footer>
 
-    <!-- JavaScript -->
+    <button class="scroll-top-btn" aria-label="Scroll to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="js/script.js"></script>
   </body>
 </html>

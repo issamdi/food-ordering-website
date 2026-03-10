@@ -1,15 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Restaurant Website</title>
-
-    <!-- Link our CSS file -->
+    <title>Order - Restaurant Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    />
     <link rel="stylesheet" href="css/style.css" />
-
-    <!-- Prevent theme flash by applying saved theme immediately -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <script>
       (function () {
         const savedTheme = localStorage.getItem("theme") || "light";
@@ -19,20 +24,16 @@
   </head>
 
   <body>
-    <!-- Navbar Section Starts Here -->
-    <section class="navbar">
-      <div class="container">
-        <div class="logo">
-          <a href="#" title="Logo">
-            <img
-              src="images/logo.png"
-              alt="Restaurant Logo"
-              class="img-responsive"
-            />
-          </a>
-        </div>
+    <div class="glass-edge-top"></div>
+    <div class="glass-edge-bottom"></div>
+    <div class="cursor-glow"></div>
 
-        <!-- Mobile Menu Toggle Button -->
+    <nav class="navbar">
+      <div class="nav-content">
+        <a href="index.html" class="nav-logo" title="Go to Home Page">
+          <img src="images/logo.png" alt="Restaurant Logo" />
+        </a>
+
         <button
           class="mobile-menu-toggle"
           aria-controls="navbar-menu navbar-controls"
@@ -44,163 +45,197 @@
           <span class="hamburger-line"></span>
         </button>
 
-        <div
-          class="menu text-right"
+        <ul
+          class="nav-links"
           id="navbar-menu"
           role="navigation"
           aria-hidden="true"
         >
-          <ul>
-            <li>
-              <a href="index.html">Home</a>
-            </li>
-            <li>
-              <a href="categories.html">Categories</a>
-            </li>
-            <li>
-              <a href="foods.html">Food</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
-          </ul>
-        </div>
+          <li><a href="index.html" data-translate="home">Home</a></li>
+          <li>
+            <a href="categories.html" data-translate="categories">Categories</a>
+          </li>
+          <li><a href="foods.html" data-translate="food">Food</a></li>
+          <li>
+            <a href="cart.html"
+              ><span data-translate="myOrders">My Orders</span>
+              <span class="cart-counter">0</span></a
+            >
+          </li>
+          <li><a href="#contact" data-translate="contact">Contact</a></li>
+        </ul>
 
-        <div class="theme-toggle" onclick="toggleTheme()">
-          <span class="icon">🌙</span>
+        <div class="nav-controls" id="navbar-controls">
+          <select
+            class="language-selector"
+            onchange="changeLanguage(this.value)"
+          >
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+            <option value="ar">AR</option>
+          </select>
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <span class="icon">🌙</span>
+          </button>
         </div>
-
-        <div class="clearfix"></div>
       </div>
-    </section>
-    <!-- Navbar Section Ends Here -->
+    </nav>
 
-    <!-- food-search section -->
-    <section class="food-search">
+    <div class="page-header">
+      <h2>Confirm Your Order</h2>
+    </div>
+
+    <!-- Order Form Section -->
+    <section class="order-section">
       <div class="container">
-        <h2 class="text-center text-white">
-          Fill this form to confirm your order.
-        </h2>
+        <form action="#" class="order-form">
+          <div class="form-section">
+            <h3>Selected Food</h3>
+            <div
+              style="
+                display: flex;
+                gap: 1.5rem;
+                align-items: flex-start;
+                flex-wrap: wrap;
+              "
+            >
+              <div
+                class="food-card-img-wrapper"
+                style="width: 200px; flex-shrink: 0"
+              >
+                <img
+                  src="images/menu-pizza.jpg"
+                  alt="Hawaiian Chicken Pizza"
+                  class="food-card-img"
+                />
+              </div>
+              <div style="flex: 1; min-width: 200px">
+                <h4>Hawaiian Chicken Pizza</h4>
+                <p class="food-price">$12.99</p>
+                <div class="form-group" style="margin-top: 1rem">
+                  <label for="qty">Quantity</label>
+                  <input
+                    type="number"
+                    id="qty"
+                    name="qty"
+                    class="form-input"
+                    value="1"
+                    min="1"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <form action="#" class="order">
-          <fieldset>
-            <legend>Selected Food</legend>
-
-            <div class="food-menu-img">
-              <img
-                src="images/menu-pizza.jpg"
-                alt="Chicke Hawain Pizza"
-                class="img-responsive img-curve"
-              />
+          <div class="form-section">
+            <h3>Delivery Details</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="full-name">Full Name *</label>
+                <input
+                  type="text"
+                  id="full-name"
+                  name="full-name"
+                  placeholder="E.g. Vijay Thapa"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="contact">Phone Number *</label>
+                <input
+                  type="tel"
+                  id="contact"
+                  name="contact"
+                  placeholder="E.g. 9843xxxxxx"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="E.g. hi@vijaythapa.com"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div class="form-group full-width">
+                <label for="address">Address *</label>
+                <textarea
+                  id="address"
+                  name="address"
+                  rows="4"
+                  placeholder="E.g. Street, City, Country"
+                  class="form-input"
+                  required
+                ></textarea>
+              </div>
             </div>
 
-            <div class="food-menu-desc">
-              <h3>Hawaiian Chicken Pizza</h3>
-              <p class="food-price">$12.99</p>
-
-              <div class="order-label">Quantity</div>
-              <input
-                type="number"
-                name="qty"
-                class="input-responsive"
-                value="1"
-                required
-              />
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>Delivery Details</legend>
-            <div class="order-label">Full Name</div>
-            <input
-              type="text"
-              name="full-name"
-              placeholder="E.g. Vijay Thapa"
-              class="input-responsive"
-              required
-            />
-
-            <div class="order-label">Phone Number</div>
-            <input
-              type="tel"
-              name="contact"
-              placeholder="E.g. 9843xxxxxx"
-              class="input-responsive"
-              required
-            />
-
-            <div class="order-label">Email</div>
-            <input
-              type="email"
-              name="email"
-              placeholder="E.g. hi@vijaythapa.com"
-              class="input-responsive"
-              required
-            />
-
-            <div class="order-label">Address</div>
-            <textarea
-              name="address"
-              rows="10"
-              placeholder="E.g. Street, City, Country"
-              class="input-responsive"
-              required
-            ></textarea>
-
-            <input
+            <button
               type="submit"
               name="submit"
-              value="Confirm Order"
-              class="btn btn-primary"
-            />
-          </fieldset>
+              class="btn btn-primary btn-large"
+            >
+              Confirm Order
+            </button>
+          </div>
         </form>
       </div>
     </section>
-    <!-- fOOD sEARCH Section Ends Here -->
 
-    <!-- social Section Starts Here -->
-    <section class="social">
-      <div class="container text-center">
-        <ul>
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <h2 class="section-title" data-translate="followUs">Follow Us</h2>
+        <ul class="social-links">
           <li>
-            <a href="#" title="Facebook">
-              <img
+            <a href="#" title="Facebook"
+              ><img
                 src="https://img.icons8.com/color/48/facebook-new.png"
                 alt="Facebook"
-              />
-            </a>
+            /></a>
           </li>
           <li>
-            <a href="#" title="Instagram">
-              <img
+            <a href="#" title="Instagram"
+              ><img
                 src="https://img.icons8.com/color/48/instagram-new.png"
                 alt="Instagram"
-              />
-            </a>
+            /></a>
           </li>
           <li>
-            <a href="#" title="X (Twitter)">
-              <img
+            <a href="#" title="X (Twitter)"
+              ><img
                 src="https://img.icons8.com/color/48/twitterx--v1.png"
                 alt="X (Twitter)"
-              />
-            </a>
+            /></a>
           </li>
         </ul>
       </div>
     </section>
-    <!-- social Section Ends Here -->
 
-    <!-- footer Section Starts Here -->
-    <section class="footer">
+    <footer class="footer">
       <div class="container text-center">
-        <p>All rights reserved. Designed By <a href="#">ID</a></p>
+        <p>
+          All rights reserved. Designed By
+          <a
+            href="https://issamdaoudi.site"
+            target="_blank"
+            rel="noopener noreferrer"
+            >ID</a
+          >
+        </p>
       </div>
-    </section>
-    <!-- footer Section Ends Here -->
+    </footer>
 
-    <!-- JavaScript -->
+    <button class="scroll-top-btn" aria-label="Scroll to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="js/script.js"></script>
   </body>
 </html>
