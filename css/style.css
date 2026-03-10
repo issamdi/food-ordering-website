@@ -1977,6 +1977,19 @@ body.modal-open {
   }
 }
 
+@keyframes mobileMenuOpen {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top center;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+    transform-origin: top center;
+  }
+}
+
 @keyframes statusPulse {
   0%,
   100% {
@@ -2084,7 +2097,8 @@ body.modal-open {
     padding: 1.5rem;
     gap: 0.25rem;
     z-index: 999;
-    animation: fadeInUp 0.3s var(--ease-premium);
+    animation: mobileMenuOpen 0.3s var(--ease-premium);
+    transform-origin: top center;
   }
 
   .nav-links.active li a {
@@ -2228,14 +2242,6 @@ body.modal-open {
 }
 
 /* ── RTL SUPPORT ── */
-[dir="rtl"] .nav-content {
-  flex-direction: row-reverse;
-}
-
-[dir="rtl"] .nav-links {
-  flex-direction: row-reverse;
-}
-
 @media (max-width: 768px) {
   [dir="rtl"] .nav-links.active {
     text-align: right;
