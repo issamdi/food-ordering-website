@@ -24,7 +24,7 @@ define('STRIPE_SECRET_KEY', getenv('STRIPE_SECRET_KEY') ?: 'sk_test_YOUR_ACTUAL_
 define('STRIPE_WEBHOOK_SECRET', getenv('STRIPE_WEBHOOK_SECRET') ?: 'whsec_YOUR_ACTUAL_WEBHOOK_SECRET_HERE');
 
 // Application configuration
-define('APP_NAME', 'Your Restaurant Name');
+define('APP_NAME', 'Wow Food');
 define('APP_URL', getenv('APP_URL') ?: 'http://localhost/food-order');
 define('APP_ENV', getenv('APP_ENV') ?: 'development');
 
