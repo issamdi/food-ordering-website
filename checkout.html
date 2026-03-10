@@ -93,26 +93,26 @@
           <!-- Order Summary -->
           <div class="checkout-summary">
             <div class="summary-box">
-              <h3>Your Order</h3>
+              <h3 data-translate="yourOrder">Your Order</h3>
               <div id="checkout-items">
                 <!-- Order items will be loaded here -->
               </div>
 
               <div class="summary-totals">
                 <div class="summary-row">
-                  <span>Subtotal:</span>
+                  <span data-translate="subtotal">Subtotal:</span>
                   <span id="checkout-subtotal">$0.00</span>
                 </div>
                 <div class="summary-row">
-                  <span>Delivery Fee:</span>
+                  <span data-translate="deliveryFee">Delivery Fee:</span>
                   <span id="checkout-delivery">$3.99</span>
                 </div>
                 <div class="summary-row">
-                  <span>Tax (8%):</span>
+                  <span data-translate="tax">Tax (8%):</span>
                   <span id="checkout-tax">$0.00</span>
                 </div>
                 <div class="summary-row total">
-                  <span>Total:</span>
+                  <span data-translate="total">Total:</span>
                   <span id="checkout-total">$3.99</span>
                 </div>
               </div>
@@ -123,47 +123,61 @@
           <div class="payment-form">
             <form id="payment-form">
               <div class="form-section">
-                <h3>Delivery Information</h3>
+                <h3 data-translate="deliveryInfo">Delivery Information</h3>
                 <div class="form-grid">
                   <div class="form-group">
-                    <label for="customer-name">Full Name *</label>
+                    <label for="customer-name" data-translate="fullName"
+                      >Full Name *</label
+                    >
                     <input
                       type="text"
                       id="customer-name"
                       name="customerName"
                       required
+                      data-translate-placeholder="fullName"
                       placeholder="John Doe"
                       class="form-input"
                     />
                   </div>
                   <div class="form-group">
-                    <label for="customer-email">Email Address *</label>
+                    <label for="customer-email" data-translate="email"
+                      >Email Address *</label
+                    >
                     <input
                       type="email"
                       id="customer-email"
                       name="customerEmail"
                       required
+                      data-translate-placeholder="email"
                       placeholder="john@example.com"
                       class="form-input"
                     />
                   </div>
                   <div class="form-group">
-                    <label for="customer-phone">Phone Number *</label>
+                    <label for="customer-phone" data-translate="phone"
+                      >Phone Number *</label
+                    >
                     <input
                       type="tel"
                       id="customer-phone"
                       name="customerPhone"
                       required
+                      data-translate-placeholder="phone"
                       placeholder="(555) 123-4567"
                       class="form-input"
                     />
                   </div>
                   <div class="form-group full-width">
-                    <label for="customer-address">Delivery Address *</label>
+                    <label
+                      for="customer-address"
+                      data-translate="deliveryAddress"
+                      >Delivery Address *</label
+                    >
                     <textarea
                       id="customer-address"
                       name="customerAddress"
                       required
+                      data-translate-placeholder="deliveryAddress"
                       placeholder="123 Main Street, City, State 12345"
                       class="form-input"
                       rows="3"
@@ -173,7 +187,7 @@
               </div>
 
               <div class="form-section">
-                <h3>Secure Payment</h3>
+                <h3 data-translate="securePayment">Secure Payment</h3>
                 <div class="security-badges">
                   <span class="security-badge">256-bit SSL Encryption</span>
                   <span class="security-badge">PCI DSS Compliant</span>
@@ -181,7 +195,9 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="card-element">Card Information *</label>
+                  <label for="card-element" data-translate="cardInfo"
+                    >Card Information *</label
+                  >
                   <div id="card-element" class="stripe-card-element"></div>
                   <div
                     id="card-errors"
@@ -191,7 +207,7 @@
                 </div>
 
                 <div class="payment-methods">
-                  <span>We accept:</span>
+                  <span data-translate="weAccept">We accept:</span>
                   <div class="payment-icons">
                     <img
                       src="https://img.icons8.com/color/48/visa.png"
@@ -223,13 +239,15 @@
                   id="submit-payment"
                   class="btn btn-primary btn-large"
                 >
-                  <span id="button-text">Complete Secure Payment</span>
+                  <span id="button-text" data-translate="completePayment"
+                    >Complete Secure Payment</span
+                  >
                   <span id="spinner" class="hidden">
                     <div class="loading-spinner"></div>
                   </span>
                 </button>
                 <p class="payment-security-note">
-                  <small
+                  <small data-translate="paymentSecurityNote"
                     >Your payment information is encrypted and secure. We never
                     store your card details on our servers.</small
                   >
@@ -245,20 +263,36 @@
             <div class="success-animation">
               <div class="checkmark">&#10003;</div>
             </div>
-            <h3>Payment Successful!</h3>
-            <p>
+            <h3 data-translate="paymentSuccessful">Payment Successful!</h3>
+            <p data-translate="thankYouOrder">
               Thank you for your order! We'll start preparing your delicious
               food right away.
             </p>
             <div class="order-details">
-              <p><strong>Order ID:</strong> <span id="order-id"></span></p>
-              <p><strong>Estimated Delivery:</strong> 30-45 minutes</p>
+              <p>
+                <strong data-translate="orderId">Order ID:</strong>
+                <span id="order-id"></span>
+              </p>
+              <p>
+                <strong data-translate="estimatedDelivery"
+                  >Estimated Delivery:</strong
+                >
+                <span data-translate="estimatedTime">30-45 minutes</span>
+              </p>
             </div>
             <div class="modal-actions">
-              <button class="btn btn-primary" onclick="goToHome()">
+              <button
+                class="btn btn-primary"
+                onclick="goToHome()"
+                data-translate="continueShopping"
+              >
                 Continue Shopping
               </button>
-              <button class="btn btn-secondary" onclick="trackOrder()">
+              <button
+                class="btn btn-secondary"
+                onclick="trackOrder()"
+                data-translate="trackOrder"
+              >
                 Track Order
               </button>
             </div>
@@ -298,6 +332,20 @@
 
     <footer class="footer">
       <div class="container text-center">
+        <div class="footer-links">
+          <a href="javascript:void(0)" title="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="javascript:void(0)" title="WhatsApp"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+          <a href="javascript:void(0)" title="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+          <a href="javascript:void(0)" title="Phone"
+            ><i class="fas fa-phone"></i
+          ></a>
+        </div>
         <p>
           All rights reserved. Designed By
           <a
@@ -314,7 +362,6 @@
       <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="js/checkout-test.js"></script>
     <script src="js/script.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/checkout.js"></script>

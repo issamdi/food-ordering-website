@@ -82,7 +82,10 @@
     </nav>
 
     <div class="page-header">
-      <h2>Search Results for <a href="#" id="search-query-display">""</a></h2>
+      <h2>
+        <span data-translate="searchResultsFor">Search Results for</span>
+        <a href="#" id="search-query-display">""</a>
+      </h2>
     </div>
 
     <!-- Search Again -->
@@ -98,10 +101,17 @@
             type="search"
             name="search"
             id="search-input"
+            data-translate-placeholder="search"
             placeholder="Search for Food.."
             required
           />
-          <button type="submit" class="btn btn-primary">Search</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            data-translate="searchBtn"
+          >
+            Search
+          </button>
         </form>
       </div>
     </section>
@@ -110,7 +120,12 @@
     <section class="section">
       <div class="container">
         <div class="food-grid stagger-reveal" id="search-results"></div>
-        <p class="text-center" id="no-results" style="display: none">
+        <p
+          class="text-center"
+          id="no-results"
+          style="display: none"
+          data-translate="noResults"
+        >
           No food items found. Try a different search term.
         </p>
       </div>
@@ -147,6 +162,20 @@
 
     <footer class="footer">
       <div class="container text-center">
+        <div class="footer-links">
+          <a href="javascript:void(0)" title="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="javascript:void(0)" title="WhatsApp"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+          <a href="javascript:void(0)" title="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+          <a href="javascript:void(0)" title="Phone"
+            ><i class="fas fa-phone"></i
+          ></a>
+        </div>
         <p>
           All rights reserved. Designed By
           <a

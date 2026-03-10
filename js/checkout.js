@@ -8,7 +8,6 @@ let stripe, elements, cardElement;
 
 function initializeStripeComponents() {
   try {
-    console.log("Initializing Stripe...");
     stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
     elements = stripe.elements();
 
@@ -32,7 +31,6 @@ function initializeStripeComponents() {
     const cardContainer = document.getElementById("card-element");
     if (cardContainer) {
       cardElement.mount("#card-element");
-      console.log("Stripe card element mounted");
     }
 
     // Handle errors
@@ -47,7 +45,6 @@ function initializeStripeComponents() {
 
     return true;
   } catch (error) {
-    console.error("Stripe initialization failed:", error);
     const cardContainer = document.getElementById("card-element");
     if (cardContainer) {
       cardContainer.innerHTML =
@@ -59,27 +56,7 @@ function initializeStripeComponents() {
 
 // Load checkout data when page loads
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOM loaded, initializing checkout...");
-
   if (window.location.pathname.includes("checkout.html")) {
-    // Test if basic DOM elements are accessible
-    console.log("Testing DOM elements...");
-    const testButton = document.querySelector("button");
-    const testInput = document.querySelector("input");
-    const testForm = document.getElementById("payment-form");
-
-    console.log("Button found:", !!testButton);
-    console.log("Input found:", !!testInput);
-    console.log("Form found:", !!testForm);
-
-    // Add click test to all buttons
-    const buttons = document.querySelectorAll("button, .btn");
-    buttons.forEach((btn, index) => {
-      btn.addEventListener("click", function (e) {
-        console.log(`Button ${index} clicked:`, btn);
-      });
-    });
-
     // Initialize Stripe first
     const stripeInitialized = initializeStripeComponents();
 
@@ -126,7 +103,7 @@ function displayCheckoutItems(cart) {
         <span class="item-quantity">× ${item.quantity}</span>
       </div>
       <span class="item-price">$${(item.price * item.quantity).toFixed(
-        2
+        2,
       )}</span>
     `;
     checkoutItems.appendChild(itemElement);
@@ -136,22 +113,20 @@ function displayCheckoutItems(cart) {
 function calculateCheckoutTotals(cart) {
   const subtotal = cart.reduce(
     (total, item) => total + item.price * item.quantity,
-    0
+    0,
   );
   const deliveryFee = 3.99;
   const taxRate = 0.08;
   const tax = subtotal * taxRate;
   const total = subtotal + deliveryFee + tax;
 
-  document.getElementById(
-    "checkout-subtotal"
-  ).textContent = `$${subtotal.toFixed(2)}`;
-  document.getElementById(
-    "checkout-delivery"
-  ).textContent = `$${deliveryFee.toFixed(2)}`;
+  document.getElementById("checkout-subtotal").textContent =
+    `$${subtotal.toFixed(2)}`;
+  document.getElementById("checkout-delivery").textContent =
+    `$${deliveryFee.toFixed(2)}`;
   document.getElementById("checkout-tax").textContent = `$${tax.toFixed(2)}`;
   document.getElementById("checkout-total").textContent = `$${total.toFixed(
-    2
+    2,
   )}`;
 
   return { subtotal, deliveryFee, tax, total };
@@ -244,7 +219,7 @@ function setupFormSubmission() {
 
       if (!stripe || !cardElement) {
         showCardError(
-          "Payment system not initialized. Please refresh the page."
+          "Payment system not initialized. Please refresh the page.",
         );
         return;
       }
@@ -264,7 +239,6 @@ function setupFormSubmission() {
         // Process payment
         await processPayment(token);
       } catch (error) {
-        console.error("Payment error:", error);
         showCardError("Payment failed. Please try again.");
         setLoading(false);
       }
@@ -275,7 +249,7 @@ function setupFormSubmission() {
 function validateForm() {
   const form = document.getElementById("payment-form");
   const requiredFields = form.querySelectorAll(
-    "input[required], textarea[required]"
+    "input[required], textarea[required]",
   );
   let isValid = true;
 
@@ -337,9 +311,8 @@ async function processPayment(token) {
       throw new Error(result.message || "Payment failed");
     }
   } catch (error) {
-    console.error("Payment processing error:", error);
     showCardError(
-      error.message || "Payment processing failed. Please try again."
+      error.message || "Payment processing failed. Please try again.",
     );
     setLoading(false);
   }
@@ -360,12 +333,6 @@ function processPaymentSuccess(orderData) {
   showSuccessModal();
 
   setLoading(false);
-}
-
-function generateOrderId() {
-  const timestamp = Date.now();
-  const random = Math.floor(Math.random() * 1000);
-  return `ORD-${timestamp}-${random}`;
 }
 
 function showCardError(message) {

@@ -82,7 +82,10 @@
     </nav>
 
     <div class="page-header">
-      <h2>Food on <a href="#">"Category"</a></h2>
+      <h2>
+        <span data-translate="foodIn">Food in</span>
+        <span id="category-name-display">Category</span>
+      </h2>
     </div>
 
     <!-- Food Menu -->
@@ -90,189 +93,15 @@
       <div class="container">
         <h2 class="section-title" data-translate="foodTitle">Food Menu</h2>
 
-        <div class="food-grid stagger-reveal">
-          <div class="food-card food-menu-box">
-            <div class="food-card-img-wrapper">
-              <img
-                src="images/pizza.jpg"
-                alt="Margherita Pizza"
-                class="food-card-img"
-              />
-            </div>
-            <div class="food-card-body">
-              <h4>Margherita Pizza</h4>
-              <p class="food-price">$11.75</p>
-              <p class="food-detail">
-                Classic Italian pizza with fresh mozzarella, basil, and rich
-                tomato sauce on a crispy thin crust.
-              </p>
-              <div class="food-card-actions">
-                <a
-                  href="order.html"
-                  class="btn btn-primary"
-                  data-translate="orderNow"
-                  >Order Now</a
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card food-menu-box">
-            <div class="food-card-img-wrapper">
-              <img
-                src="images/burger.jpg"
-                alt="Smoky BBQ Burger"
-                class="food-card-img"
-              />
-            </div>
-            <div class="food-card-body">
-              <h4>Smoky BBQ Burger</h4>
-              <p class="food-price">$9.50</p>
-              <p class="food-detail">
-                Juicy beef patty with smoky BBQ sauce, caramelized onions,
-                cheddar cheese, and crisp lettuce.
-              </p>
-              <div class="food-card-actions">
-                <a
-                  href="order.html"
-                  class="btn btn-primary"
-                  data-translate="orderNow"
-                  >Order Now</a
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card food-menu-box">
-            <div class="food-card-img-wrapper">
-              <img
-                src="images/momo.jpg"
-                alt="Chicken Steam Momo"
-                class="food-card-img"
-              />
-            </div>
-            <div class="food-card-body">
-              <h4>Chicken Steam Momo</h4>
-              <p class="food-price">$7.25</p>
-              <p class="food-detail">
-                Traditional steamed dumplings filled with seasoned chicken,
-                ginger, garlic, and fresh herbs.
-              </p>
-              <div class="food-card-actions">
-                <a
-                  href="order.html"
-                  class="btn btn-primary"
-                  data-translate="orderNow"
-                  >Order Now</a
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card food-menu-box">
-            <div class="food-card-img-wrapper">
-              <img
-                src="images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg"
-                alt="Grilled Chicken Plate"
-                class="food-card-img"
-              />
-            </div>
-            <div class="food-card-body">
-              <h4>Grilled Chicken Plate</h4>
-              <p class="food-price">$13.99</p>
-              <p class="food-detail">
-                Tender grilled chicken breast served with warm bread, fresh
-                greens, peppers, and a zesty spice sauce.
-              </p>
-              <div class="food-card-actions">
-                <a
-                  href="order.html"
-                  class="btn btn-primary"
-                  data-translate="orderNow"
-                  >Order Now</a
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card food-menu-box">
-            <div class="food-card-img-wrapper">
-              <img
-                src="images/lavash-rolls-top-view-table.jpg"
-                alt="Lavash Wraps"
-                class="food-card-img"
-              />
-            </div>
-            <div class="food-card-body">
-              <h4>Lavash Wraps</h4>
-              <p class="food-price">$8.99</p>
-              <p class="food-detail">
-                Soft lavash bread rolled with seasoned meat, fresh vegetables,
-                herbs, and a creamy garlic sauce.
-              </p>
-              <div class="food-card-actions">
-                <a
-                  href="order.html"
-                  class="btn btn-primary"
-                  data-translate="orderNow"
-                  >Order Now</a
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card food-menu-box">
-            <div class="food-card-img-wrapper">
-              <img
-                src="images/colorful-bowl-of-deliciousness-with-fried-egg-RaPUELLHgqFnS9zI85BpU.webp"
-                alt="Colorful Power Bowl"
-                class="food-card-img"
-              />
-            </div>
-            <div class="food-card-body">
-              <h4>Colorful Power Bowl</h4>
-              <p class="food-price">$10.50</p>
-              <p class="food-detail">
-                A vibrant bowl loaded with fresh veggies, grains, a perfectly
-                fried egg, and a tangy dressing.
-              </p>
-              <div class="food-card-actions">
-                <a
-                  href="order.html"
-                  class="btn btn-primary"
-                  data-translate="orderNow"
-                  >Order Now</a
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="food-card food-menu-box">
-            <div class="food-card-img-wrapper">
-              <img
-                src="images/potato-patties-topped-with-beef-patties-shoe-strings.jpg"
-                alt="Beef &amp; Potato Patties"
-                class="food-card-img"
-              />
-            </div>
-            <div class="food-card-body">
-              <h4>Beef &amp; Potato Patties</h4>
-              <p class="food-price">$10.25</p>
-              <p class="food-detail">
-                Golden potato patties topped with seasoned beef, crispy
-                shoestring fries, and a savory drizzle.
-              </p>
-              <div class="food-card-actions">
-                <a
-                  href="order.html"
-                  class="btn btn-primary"
-                  data-translate="orderNow"
-                  >Order Now</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="food-grid stagger-reveal" id="category-results"></div>
+        <p
+          id="no-category-results"
+          class="text-center"
+          style="display: none; padding: 2rem; opacity: 0.7"
+          data-translate="noCategoryResults"
+        >
+          No food items found in this category.
+        </p>
       </div>
     </section>
 
@@ -307,6 +136,20 @@
 
     <footer class="footer">
       <div class="container text-center">
+        <div class="footer-links">
+          <a href="javascript:void(0)" title="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="javascript:void(0)" title="WhatsApp"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+          <a href="javascript:void(0)" title="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+          <a href="javascript:void(0)" title="Phone"
+            ><i class="fas fa-phone"></i
+          ></a>
+        </div>
         <p>
           All rights reserved. Designed By
           <a

@@ -93,7 +93,7 @@
       <div class="container">
         <form
           action="food-search.html"
-          method="POST"
+          method="GET"
           class="hero-search-form"
           style="max-width: 600px; margin: 0 auto"
         >
@@ -119,66 +119,93 @@
     <section class="section">
       <div class="container">
         <div class="categories-grid stagger-reveal">
-          <a href="category-foods.html" class="category-card">
+          <a href="category-foods.html?category=pizza" class="category-card">
             <img src="images/pizza.jpg" alt="Pizza" class="category-card-img" />
-            <span class="category-badge">New</span>
-            <div class="category-card-overlay"><h3>Pizza</h3></div>
+            <span class="category-badge" data-translate="badgeNew">New</span>
+            <div class="category-card-overlay">
+              <h3 data-translate="pizza">Pizza</h3>
+            </div>
           </a>
 
-          <a href="category-foods.html" class="category-card">
+          <a href="category-foods.html?category=burger" class="category-card">
             <img
               src="images/burger.jpg"
               alt="Burger"
               class="category-card-img"
             />
-            <span class="category-badge">Popular</span>
-            <div class="category-card-overlay"><h3>Burger</h3></div>
+            <span class="category-badge" data-translate="badgePopular"
+              >Popular</span
+            >
+            <div class="category-card-overlay">
+              <h3 data-translate="burger">Burger</h3>
+            </div>
           </a>
 
-          <a href="category-foods.html" class="category-card">
+          <a href="category-foods.html?category=momo" class="category-card">
             <img src="images/momo.jpg" alt="Momo" class="category-card-img" />
-            <span class="category-badge">Hot</span>
-            <div class="category-card-overlay"><h3>Momo</h3></div>
+            <span class="category-badge" data-translate="badgeHot">Hot</span>
+            <div class="category-card-overlay">
+              <h3 data-translate="momo">Momo</h3>
+            </div>
           </a>
 
-          <a href="category-foods.html" class="category-card">
+          <a
+            href="category-foods.html?category=grilled-chicken"
+            class="category-card"
+          >
             <img
               src="images/crilled-chicken-bread-piece-greens-pepper-sauce-spices-side-view.jpg"
               alt="Grilled Chicken"
               class="category-card-img"
             />
-            <span class="category-badge">Chef's Pick</span>
-            <div class="category-card-overlay"><h3>Grilled Chicken</h3></div>
+            <span class="category-badge" data-translate="badgeChefsPick"
+              >Chef's Pick</span
+            >
+            <div class="category-card-overlay">
+              <h3 data-translate="grilledChicken">Grilled Chicken</h3>
+            </div>
           </a>
 
-          <a href="category-foods.html" class="category-card">
+          <a href="category-foods.html?category=wraps" class="category-card">
             <img
               src="images/lavash-rolls-top-view-table.jpg"
               alt="Wraps"
               class="category-card-img"
             />
-            <span class="category-badge">Trending</span>
-            <div class="category-card-overlay"><h3>Wraps</h3></div>
+            <span class="category-badge" data-translate="badgeTrending"
+              >Trending</span
+            >
+            <div class="category-card-overlay">
+              <h3 data-translate="wraps">Wraps</h3>
+            </div>
           </a>
 
-          <a href="category-foods.html" class="category-card">
+          <a href="category-foods.html?category=bowls" class="category-card">
             <img
               src="images/colorful-bowl-of-deliciousness-with-fried-egg-RaPUELLHgqFnS9zI85BpU.webp"
               alt="Bowls"
               class="category-card-img"
             />
-            <span class="category-badge">Healthy</span>
-            <div class="category-card-overlay"><h3>Bowls</h3></div>
+            <span class="category-badge" data-translate="badgeHealthy"
+              >Healthy</span
+            >
+            <div class="category-card-overlay">
+              <h3 data-translate="bowls">Bowls</h3>
+            </div>
           </a>
 
-          <a href="category-foods.html" class="category-card">
+          <a href="category-foods.html?category=patties" class="category-card">
             <img
               src="images/potato-patties-topped-with-beef-patties-shoe-strings.jpg"
               alt="Patties"
               class="category-card-img"
             />
-            <span class="category-badge">Classic</span>
-            <div class="category-card-overlay"><h3>Patties</h3></div>
+            <span class="category-badge" data-translate="badgeClassic"
+              >Classic</span
+            >
+            <div class="category-card-overlay">
+              <h3 data-translate="patties">Patties</h3>
+            </div>
           </a>
         </div>
       </div>
@@ -216,6 +243,20 @@
 
     <footer class="footer">
       <div class="container text-center">
+        <div class="footer-links">
+          <a href="javascript:void(0)" title="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="javascript:void(0)" title="WhatsApp"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+          <a href="javascript:void(0)" title="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+          <a href="javascript:void(0)" title="Phone"
+            ><i class="fas fa-phone"></i
+          ></a>
+        </div>
         <p>
           All rights reserved. Designed By
           <a

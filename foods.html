@@ -99,10 +99,17 @@
           <input
             type="search"
             name="search"
+            data-translate-placeholder="search"
             placeholder="Search for Food.."
             required
           />
-          <button type="submit" class="btn btn-primary">Search</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            data-translate="searchBtn"
+          >
+            Search
+          </button>
         </form>
       </div>
     </section>
@@ -120,9 +127,9 @@
               />
             </div>
             <div class="food-card-body">
-              <h4>Margherita Pizza</h4>
+              <h4 data-translate="foodMargherita">Margherita Pizza</h4>
               <p class="food-price">$11.75</p>
-              <p class="food-detail">
+              <p class="food-detail" data-translate="foodMargheritaDesc">
                 Classic Italian pizza with fresh mozzarella, basil, and rich
                 tomato sauce on a crispy thin crust.
               </p>
@@ -146,9 +153,9 @@
               />
             </div>
             <div class="food-card-body">
-              <h4>Smoky BBQ Burger</h4>
+              <h4 data-translate="foodBurger">Smoky BBQ Burger</h4>
               <p class="food-price">$9.50</p>
-              <p class="food-detail">
+              <p class="food-detail" data-translate="foodBurgerDesc">
                 Juicy beef patty with smoky BBQ sauce, caramelized onions,
                 cheddar cheese, and crisp lettuce.
               </p>
@@ -172,9 +179,9 @@
               />
             </div>
             <div class="food-card-body">
-              <h4>Chicken Steam Momo</h4>
+              <h4 data-translate="foodMomo">Chicken Steam Momo</h4>
               <p class="food-price">$7.25</p>
-              <p class="food-detail">
+              <p class="food-detail" data-translate="foodMomoDesc">
                 Traditional steamed dumplings filled with seasoned chicken,
                 ginger, garlic, and fresh herbs.
               </p>
@@ -198,9 +205,9 @@
               />
             </div>
             <div class="food-card-body">
-              <h4>Grilled Chicken Plate</h4>
+              <h4 data-translate="foodGrilledChicken">Grilled Chicken Plate</h4>
               <p class="food-price">$13.99</p>
-              <p class="food-detail">
+              <p class="food-detail" data-translate="foodGrilledChickenDesc">
                 Tender grilled chicken breast served with warm bread, fresh
                 greens, peppers, and a zesty spice sauce.
               </p>
@@ -224,9 +231,9 @@
               />
             </div>
             <div class="food-card-body">
-              <h4>Lavash Wraps</h4>
+              <h4 data-translate="foodWraps">Lavash Wraps</h4>
               <p class="food-price">$8.99</p>
-              <p class="food-detail">
+              <p class="food-detail" data-translate="foodWrapsDesc">
                 Soft lavash bread rolled with seasoned meat, fresh vegetables,
                 herbs, and a creamy garlic sauce.
               </p>
@@ -250,9 +257,9 @@
               />
             </div>
             <div class="food-card-body">
-              <h4>Colorful Power Bowl</h4>
+              <h4 data-translate="foodBowl">Colorful Power Bowl</h4>
               <p class="food-price">$10.50</p>
-              <p class="food-detail">
+              <p class="food-detail" data-translate="foodBowlDesc">
                 A vibrant bowl loaded with fresh veggies, grains, a perfectly
                 fried egg, and a tangy dressing.
               </p>
@@ -276,9 +283,9 @@
               />
             </div>
             <div class="food-card-body">
-              <h4>Beef &amp; Potato Patties</h4>
+              <h4 data-translate="foodPatties">Beef &amp; Potato Patties</h4>
               <p class="food-price">$10.25</p>
-              <p class="food-detail">
+              <p class="food-detail" data-translate="foodPattiesDesc">
                 Golden potato patties topped with seasoned beef, crispy
                 shoestring fries, and a savory drizzle.
               </p>
@@ -327,6 +334,20 @@
 
     <footer class="footer">
       <div class="container text-center">
+        <div class="footer-links">
+          <a href="javascript:void(0)" title="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="javascript:void(0)" title="WhatsApp"
+            ><i class="fab fa-whatsapp"></i
+          ></a>
+          <a href="javascript:void(0)" title="Email"
+            ><i class="fas fa-envelope"></i
+          ></a>
+          <a href="javascript:void(0)" title="Phone"
+            ><i class="fas fa-phone"></i
+          ></a>
+        </div>
         <p>
           All rights reserved. Designed By
           <a
